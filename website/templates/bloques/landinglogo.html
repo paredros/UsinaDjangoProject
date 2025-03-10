@@ -1,0 +1,176 @@
+{% load static %}
+<mainsection>
+    <logo-completo>
+        <img src = "{% static "svgs/logos/logoEntero.svg" %}" alt="USINA" id="LogoUsina"/>
+
+    </logo-completo>
+    <sub-logo>
+        <h1>Arte.Ciencia.</h1>
+        <h1>Comunidad.</h1>
+    </sub-logo>
+    <issue>
+        <h2>Seasson</h2>
+        <h1>25</h1>
+    </issue>
+    <texto1>
+        <div>
+            Donde Crecen Las <b>Ideas</b>
+        </div>
+    </texto1>
+    <tags>
+        <span>Arte</span>
+        <span>Tecnologia</span>
+        <span>Social</span>
+        <span>EspacioPublico</span>
+        <!--span>Exposicion</span-->
+        <span>Data</span>
+        <span>MedioAmbiente</span>
+        <span>Educacion</span>
+        <!--span>Comunicacion</span-->
+    </tags>
+    <texto2><b>Laboratorio</b> Permanente</texto2>
+    <!--bottom>
+        <h1>BIENVENIDO</h1>
+        <linea-larga></linea-larga>
+        <linea-corta></linea-corta>
+        <circulo class="circle-anchor-right-top"></circulo>
+    </bottom-->
+</mainsection>
+
+<section id="anchorMain"></section>
+
+
+<script>
+    globalInitializers.push(function () {
+        const tagsToCheck=document.querySelector("mainsection tags");
+        let totalTags=tagsToCheck.childElementCount;
+        let currentMaxTag=totalTags-1;
+        function startCheckTagsMainOverflow(){
+            totalTags=tagsToCheck.childElementCount;
+            currentMaxTag=totalTags-1;
+            for(var i=0; i<tagsToCheck.childElementCount; i++){
+                $(tagsToCheck.children[i]).show();
+            }
+            requestAnimationFrame(checkTagsMainOverflow);
+        }
+        function checkTagsMainOverflow(){
+            if (tagsToCheck.offsetHeight < tagsToCheck.scrollHeight ) {
+
+                $(tagsToCheck.children[currentMaxTag]).hide();
+                currentMaxTag--;
+                requestAnimationFrame(checkTagsMainOverflow);
+            }
+
+        }
+
+        globalOnResizers.push(startCheckTagsMainOverflow);
+        globalOnInitRun.push(startCheckTagsMainOverflow);
+
+        const track = gsap.from("logo-completo", {
+            y: '-100vh',
+            duration: 1,
+            scrollTrigger: {
+                trigger: "mainsection",
+                start: "top 100%",
+                end: "top 0%",
+                scrub: 5,
+                markers: false,
+                /*snap: {
+                snapTo: 1,
+                duration: 0.5,
+                delay:0.2,
+                ease: "power1.inOut"
+            },*/
+                //onUpdate: (self) => console.log//manager.custom.val1=self.progress,
+                onEnter: () => {
+                    /*scrollBanner.removeClass("hideAnimOutBootm");
+                    bannerScrollTimer.play();*/
+                    try{
+                        scrollMeAppShow();
+                    }catch (e) {
+
+                    }
+                },
+                onLeave: () => {
+                    timelineMainHome.timeScale(1);
+                    timelineMainHome.play();
+                },
+                onEnterBack: () => {
+                    timelineMainHome.timeScale(3);
+                    timelineMainHome.reverse();
+                    /*scrollBanner.addClass("hideAnimOutBootm");
+                    bannerScrollTimer.pause();*/
+                    try{
+                        scrollMeAppHide();
+                    }catch (e) {
+
+                    }
+                },
+                onLeaveBack: () => {
+
+                }
+            }
+        })
+        {% if bloque_data.tracker is not None %}
+            customTrackers["{{ bloque_data.tracker }}"] = track;
+        {% endif %}
+        gsap.from("logo-completo", {
+            opacity: 0,
+            duration: 1,
+            scrollTrigger: {
+                trigger: "mainsection",
+                start: "top 110%",
+                end: "top 80%",
+                toggleActions: "play none none reverse"
+            }
+        })
+
+        const timelineMainHome = gsap.timeline();
+        timelineMainHome.pause();
+        timelineMainHome.from("mainsection sub-logo", {opacity: 0, duration: 0.3})
+            .from("mainsection texto1", {opacity: 0, duration: 0.3})
+            .from("mainsection tags", {opacity: 0, x: "100%", duration: 0.3})
+            .from("mainsection texto2", {opacity: 0, x: "100%", duration: 0.3})
+            .from("mainsection issue", {opacity: 0, y: "-100%", duration: 0.3})
+        //.from("mainsection bottom", {opacity: 0, y:"100%", duration: 0.3, delay:0.5})
+        //.from("mainsection circulo", {opacity: 0, scale:0, duration: 0.5, ease:"bounce.out"})
+
+
+        const fadeMain = gsap.to("mainsection", {opacity: 0, scale: 0.5, duration: 1});
+        fadeMain.pause();
+
+        ScrollTrigger.create({
+            trigger: "#anchorMain",
+            start: "top 100%",
+            end: "bottom 0%",
+            pin: "mainsection",
+            pinSpacing: false,
+            markers: false,
+            onEnter: () => {
+
+            },
+            onLeave: () => {
+                fadeMain.play();
+                try{
+                    scrollMeAppHide();
+                }catch (e) {
+
+                }
+            },
+            onLeaveBack: () => {
+                fadeMain.reverse();
+
+            },
+            onEnterBack: () => {
+                fadeMain.reverse();
+                //console.log("ACA");
+                try{
+                    scrollMeAppShow();
+                }catch (e) {
+
+                }
+            },
+
+        })
+    })
+</script>

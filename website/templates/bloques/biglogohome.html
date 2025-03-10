@@ -1,0 +1,92 @@
+{% load static %}
+
+<section>
+    <launch-screen><img id="logoU" src = {% static 'svgs/logos/LogoUBlueDark.svg' %} alt="U"/></launch-screen>
+</section>
+<script>
+    globalInitializers.push(function () {
+        const logoBig=$("#logoU");
+
+        const logoBigTween=gsap.to(logoBig, {
+            scale: 0.5,
+            y: "50vh",
+            opacity: 0,
+            duration: 3,
+            ease: "none",
+        })
+        {% if bloque_data.tracker is not None %}
+            customTrackers["{{ bloque_data.tracker }}"] = logoBigTween;
+        {% endif %}
+        console.log("ACA")
+        //manager.custom.tracker1=logoBigTween;
+        ScrollTrigger.create({
+            trigger:"launch-screen",
+            start:"top 0%",
+            end:"bottom 0%",
+            pin:true,
+            animation:logoBigTween,
+            scrub:1.5,
+            markers:false,
+            onEnter: () => {
+                /*scrollBanner.removeClass("hideAnimOutBootm");
+                logoMini.addClass("hideAnimOutTop");
+                bannerScrollTimer.play();*/
+                try{
+                    scrollMeAppShow();
+                }catch (e) {
+
+                }
+                try {
+                    hudAppHide();
+                } catch (e){
+
+                }
+            },
+            onLeave: () => {
+                /*scrollBanner.addClass("hideAnimOutBootm");
+                logoMini.removeClass("hideAnimOutTop");
+                bannerScrollTimer.pause();*/
+                try{
+                    scrollMeAppHide();
+                }catch (e) {
+
+                }
+                try{
+                    hudAppShow();
+                }catch (e) {
+
+                }
+            },
+            onLeaveBack: () => {
+                /*logoMini.addClass("hideAnimOutTop");
+                scrollBanner.removeClass("hideAnimOutBootm");
+                bannerScrollTimer.play();*/
+                try{
+                    scrollMeAppShow();
+                }catch (e) {
+
+                }
+                try {
+                    hudAppHide();
+                } catch (e){
+
+                }
+            },
+            onEnterBack: () => {
+                /*logoMini.addClass("hideAnimOutTop");
+                scrollBanner.removeClass("hideAnimOutBootm");
+                bannerScrollTimer.play();*/
+                try{
+                    scrollMeAppShow();
+                }catch (e) {
+
+                }
+                try {
+                    hudAppHide();
+                } catch (e){
+
+                }
+            },
+        })
+    })
+</script>

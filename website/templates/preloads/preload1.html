@@ -1,0 +1,80 @@
+<preloader>
+    <back></back>
+    <h1 id="loadingTxt">
+
+    </h1>
+</preloader>
+<script>
+    function removeCompletlyPreload(){
+        $("preloader").addClass("displayNone");
+    }
+    function checkReadyToRemovePreload(){
+        if(isReadyToRemovePreload){
+            isReadyToRemovePreload=2;
+            preloadRun=null;
+            $("#loadingTxt").removeClass("preloadShowingH1");
+            _back.style.height=`0%`;
+            $("preloader").addClass("preloadHideGlobal");
+            setTimeout(removeCompletlyPreload, 2000);
+        }else{
+            requestAnimationFrame(checkReadyToRemovePreload);
+        }
+    }
+    function shuffle(str) {
+        var str = document.getElementById('loadingTxt');
+        var a = str.innerHTML;
+        var newArr = [];
+        var neww = '';
+        var text = a.replace(/[\r\n]/g, '').split(' ');
+
+        text.map(function(v) {
+            v.split('').map(function() {
+            var hash = Math.floor(Math.random() * v.length);
+            neww += v[hash];
+            v = v.replace(v.charAt(hash), '');
+            });
+            newArr.push(neww);
+            neww = '';
+        });
+        var x = newArr.map(v => v.split('').join('')).join('\n');
+        str.textContent = x.split('').map(v => v.toUpperCase()).join('');
+        //console.log(str.value)
+    }
+    const _preloader = document.querySelector("preloader");
+    const _back = document.querySelector("preloader back");
+    let isReadyToRemovePreload=0;
+    function preloadRun(){
+        if(isReadyToRemovePreload>1){
+            return;
+        }
+        if(Math.random()<0.1){
+            if(Math.random()<0.3){
+                shuffle("LOADING");
+            }
+            _back.style.height=`${Math.random()*100}vh`;//Math.random()*100;
+            isReadyToRemovePreload=1;
+        }
+        if(preloadRun!=null){
+            requestAnimationFrame(preloadRun);
+        }
+    }
+    //requestAnimationFrame(preloadRun);
+    let step=0;
+    let word=["L","O","A","D","I","N","G","."];
+    function prePreload(){
+        var str = document.getElementById('loadingTxt');
+        if(step==0){
+            str.classList.add("preloadShowingH1");
+        }
+        _back.style.height=`${step*10}vh`;
+        str.textContent+=word[step];
+        step++;
+
+        if(step<word.length){
+            setTimeout(prePreload, 300);
+        }else{
+            requestAnimationFrame(preloadRun);
+        }
+    }
+    setTimeout(prePreload, 300);
+</script>

@@ -1,0 +1,229 @@
+@media (min-aspect-ratio: 16/9) {
+
+    slide-text1 p{
+        font-size: max(4vw,5vh) !important; 
+        line-height: max(4vw,5vh) !important;
+    }
+    .slide-text-small-1{
+        font-size: max(4vw,5vh) !important; 
+        line-height: max(4vw,5vh) !important;
+    }
+    .slide-text-small-2{
+        font-size: max(3vw,4vh) !important; 
+        line-height: max(3vw,4vh) !important;
+    }
+    mainsection bottom{
+        height: 60px !important;
+    }
+    .slider-horizontal proyecto only-text{
+        top:20% !important
+    }
+    .slider-horizontal proyecto detail-texto{
+        width: 40% !important;
+        height: 70% !important;
+    }
+    .slider-horizontal proyecto detail-texto h1{
+        font-size: max(2.5rem, 3.5vw) !important;
+        line-height: max(2.5rem, 3.5vw) !important;
+    }
+    slide-title-text{
+        padding: 0%;
+    }
+    .parrafo{
+        line-height: max(2.5vw,3.5vh) !important;
+        font-size: max(2.5vw,3.5vh) !important;
+
+    }
+}
+@media (max-width: 1000px) and (min-aspect-ratio: 6/7) {
+    mainsection bottom{
+        height: 60px !important;
+    }
+    .slider-horizontal proyecto only-text{
+        top:20% !important
+    }
+    .slider-horizontal proyecto detail-texto{
+        width: 40% !important;
+        height: 40% !important;
+    }
+    .slider-horizontal proyecto detail-texto h1{
+        font-size: max(2rem, 3vw) !important;
+        line-height: max(2rem, 3vw) !important;
+    }
+    
+    .slider-horizontal proyecto caratula {
+        font-size: 10vw;
+        line-height: 10vw;
+    }
+    .slider-horizontal proyecto titulo{
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+    }
+    .slider-horizontal proyecto figcaption{
+        height: 30% !important;
+    }
+    .slider-horizontal proyecto boton-naranja{
+        bottom: calc(50px + 30%);
+    }
+    .slider-horizontal tags{
+        visibility: hidden;
+    }
+
+    .slider-horizontal proyecto data{
+        position: absolute;
+        width: 30%;
+        bottom: 15%;
+    }
+    .slider-horizontal proyecto data fecha{
+        display: inline;
+        width: fit-content;
+        padding: 0 0.5rem;
+        font-size: 2rem;
+        color: var(--thirdColor);
+        background-color: var(--mainColor);
+    }
+    .slider-horizontal proyecto data lugar{
+        display: inline;
+        width: fit-content;
+        padding: 0 0.5rem;
+        font-weight: 100;
+        font-size: 1rem;
+        color: var(--secondColor);
+        background-color: var(--thirdColor);
+    }
+    .slider-horizontal proyecto data pais{
+        display: inline;
+        width: fit-content;
+        padding: 0 0.5rem;
+        font-weight: bold;
+        font-size: 1rem;
+        color: var(--secondColor);
+        background-color: var(--thirdColor);
+    }
+    skip-button{
+        width: 50px;
+        height: 50px;
+        left: calc(50% - 25px);
+        font-size: 0.6rem;
+    }
+    skip-button span{
+        line-height: 50px;
+    }
+    .endpage .dataGroup .data datos{
+        visibility: hidden;
+    }
+    .endpage .dataGroup:hover .data{
+        width: 90% !important;
+        
+    }
+    .endpage .dataGroup .data indice{
+        visibility: hidden !important;
+    }
+    .endpage tags{
+        width: 80% !important;
+    }
+    .footerfinalBlue .subLeft{
+        min-width: 5% !important;
+    }
+    .footerfinalBlue .subRight{
+        min-width: 5% !important;
+    }
+    .footerfinalBlue .subMid redes{
+        width: 100% !important;
+        font-size: 4vw !important;
+        padding-left: 0px !important;
+    }
+    .footerfinal linea{
+        width: 80vw;
+        
+    }
+    .footerfinal .subLeft{
+        min-width: 10vw;
+    }
+    .footerfinal .subMid{
+        height: auto;
+        width: 60%;
+        flex-direction: column;
+        margin-bottom: 5px;
+
+        
+    }
+
+    .footerfinal .subMid panelleft{
+        width: 80vw;
+        min-width: none;
+        max-width: none;
+        height: auto;
+
+    }
+    .footerfinal .subMid panelleft input[type=text],
+    .footerfinal .subMid panelleft input[type=email],
+    .footerfinal .subMid panelleft textarea, 
+    .footerfinal .subMid panelleftinput[type=submit]{
+        width: calc(80vw - 10px);
+
+    }
+    .footerfinal .subMid panelleft input[type=submit]{
+        width: 80vw;
+    }
+    .footerfinal .subMid panelleft textarea{
+        width: calc(80vw - 10px);
+        height: 10vh !important;
+    }
+    .footerfinal .subMid panelright{
+        width: 80vw;
+        height: auto;
+        margin:0;
+        margin-bottom: 5dvh;
+
+    }
+    .footerfinal .subMid panelright top{
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+    .footerfinal .subRight{
+        min-width: 5%;
+    }
+}
+@media (max-width: 1000px) and (min-aspect-ratio: 4/4){
+
+    .slider-horizontal proyecto tituloBig{
+        font-size: 4rem;
+    }
+    .slider-horizontal proyecto detail-texto h1{
+        font-size: 1.5rem !important;
+        line-height: 1.5rem !important;
+    }
+    
+    #Idioma1{
+        display: block !important;
+    }
+    #Idioma2{
+        display:none !important;
+    }
+    .menu-over holder section img{
+        
+
+        margin-left: 0 !important;
+    }
+}
+@media (max-width: 1086px){
+    .menu-over holder section{
+        margin: 0 50px;
+        padding: 2rem 2rem;
+    }
+    .menu-over holder{
+        flex-direction: row-reverse;
+    }
+    #Idioma1{
+        display: none;
+    }
+    #Idioma2{
+        display:inline;
+    }
+    .menu-over holder section img{
+        
+
+        margin-left: min(7.5vh, 7.5vw) ;
+    }
+}

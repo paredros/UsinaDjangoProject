@@ -1,0 +1,9 @@
+<section>
+    <slide-text1>
+        {% if bloque_data.lineas is not None %}
+            {% for linea in bloque_data.lineas %}
+                <p class="{{ linea.style }}">{{ linea.texto|safe }}</p>
+            {% endfor %}
+        {% endif %}
+    </slide-text1>
+</section>

@@ -1,0 +1,77 @@
+:root {
+    --dark-bg: rgba(15, 15, 15, 0.95);
+    --spacing: 150px;
+    --mainColor: #FC573B;
+    --secondColor: #182939;
+    --thirdColor: #E8E5E0;
+    --thirdColorAlpha: #18293999;
+    --fourthColor: #3DF9C3;
+    --fifthColor: #d6f93d;
+    --sixthColor: #f93dab;
+    font-family: "Atkinson Hyperlegible Mono", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.prevent-scroll-y{
+    overflow-y: hidden;
+    height: 100vh;
+}
+preloader{
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--thirdColor);
+    z-index: 100;
+    color: var(--secondColor);
+    transition: 1s ease-out;
+    
+}
+preloader back{
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 0vh;
+    left: 0px;
+    bottom: 0px;
+    background-color: var(--fifthColor);
+    transition: 0.5s ease-in-out;
+}
+preloader h1{
+    transition: 0.5s ease-in-out;
+    display: block;
+    position: fixed;
+    font-size: min(23vw,50vh);
+    line-height: min(17vw,40vh);
+    width: 60%;
+    word-wrap: break-word;
+    left: 50px;
+    bottom: -100vh;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.preloadShowingH1{
+    bottom: 50px !important;
+    opacity: 1 !important;
+}
+.preloadHideGlobal{
+    /*opacity: 0;*/
+    height: 0px;
+}
+.displayNone{
+    display: none;
+}
+@media (max-aspect-ratio: 1/1){
+
+    preloader h1{
+        left: 5vw;
+        font-size: 40vw;
+        line-height: 30vw;
+        width: 80%;
+    }
+    .preloadShowingH1{
+        bottom: 5vw;
+    }
+}
