@@ -151,7 +151,7 @@
 
     .footerfinal .subMid panelleft{
         width: 80vw;
-        min-width: none;
+        /*min-width: none;*/
         max-width: none;
         height: auto;
 

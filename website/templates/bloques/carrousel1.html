@@ -1,0 +1,60 @@
+<section class="nopadding" id="{{ bloque_data.id_global }}">
+    <{{ bloque_data.section_type }} class="slider-horizontal">
+        <holder>
+            <proyecto ><circulo></circulo><caratula>{{ bloque_data.titulo_caratula }}</caratula></proyecto>
+            <proyecto></proyecto>
+            {% for slide in bloque_data.data %}
+
+                <proyecto>
+                    <img id="back" src="{{ slide.imagen_principal.url }}" alt="">
+                    <datos>
+                        <titulo><span>{{ slide.titulo }}</span></titulo>
+                        {% if not slide.es_servicio %}
+                        <data>
+                            {% if slide.anio is not None %}
+                            <fecha>{{ slide.anio }}</fecha>
+                            {% endif %}
+                            {% if slide.ciudad is not None %}
+                            <lugar>{{ slide.ciudad }}</lugar>
+                            {% endif %}
+                            {% if slide.pais is not None %}
+                            <pais>{{ slide.pais }}</pais>
+                            {% endif %}
+                        </data>
+                        {% endif %}
+                        <tags>
+                            {% for tag in slide.tags.all %}
+                                <span>{{ tag }}</span>
+                                {% endfor %}
+
+                        </tags>
+                        <figcaption>
+
+                            <h1>{{ slide.slide_text}}</h1>
+
+                        </figcaption>
+                        <boton-naranja>VER</boton-naranja>
+                    </datos>
+                </proyecto>
+                <proyecto class="only-hidden"></proyecto>
+            {% endfor %}
+        </holder>
+        <skip-button id="{{ bloque_data.skip_id }}"><span>SALTEAR</span></skip-button>
+    </{{ bloque_data.section_type }}>
+</section>
+<section class="only-hidden"></section>
+<anchor-test id="{{ bloque_data.skip_to }}"></anchor-test>
+<script>
+    const carrousel = {}
+    carrousel.skip_id="{{ bloque_data.skip_id }}"
+    carrousel.skip_to="{{ bloque_data.skip_to }}"
+    carrousel.anchor_main = "{{ bloque_data.id_global }}"
+    carrousel.anchor_pre = "{{ bloque_data.anchor_pre }}"
+    carrousel.section_type = "{{ bloque_data.section_type }}"
+    {% if bloque_data.tracker is not None %}
+        carrousel.customTrackers="{{ bloque_data.tracker }}";
+    {% else %}
+        carrousel.customTrackers=""
+    {% endif %}
+    carrouseles.push(carrousel)
+</script>

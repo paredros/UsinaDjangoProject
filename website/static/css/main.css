@@ -603,6 +603,12 @@ circulo{
     line-height: 3rem;
     transition: 0.3s;
 }
+.slider-horizontal proyecto boton-naranja:hover{
+    cursor: pointer;
+    background-color: var(--fourthColor) !important;
+    color: var(--secondColor) !important;
+    font-weight: bold !important;
+}
 .slider-horizontal proyecto only-text{
     position:absolute;
     left: 50px;
@@ -659,12 +665,7 @@ circulo{
 .set-backcolor-6{
     background-color: var(--sixthColor) !important;
 }
-boton-naranja:hover{
-    cursor: pointer;
-    background-color: var(--fourthColor);
-    color: var(--secondColor);
-    font-weight: bold;
-}
+
 .img-zoom{
     transform: scale(1.5,1.5);
 }
@@ -893,7 +894,7 @@ slide-title-text texto .word{
     font-weight: bold;
     padding: 3px;
     opacity: 0;
-    visibility: false;
+    visibility: hidden;
     transition: 0.3s;
 }
 
@@ -921,7 +922,7 @@ slide-title-text texto .word{
 }
 .endpage .dataGroup:hover textoir{
     opacity: 1 !important;
-    visibility: true !important;
+    visibility: visible !important;
     right: 10px !important;
     left: auto !important;
 }

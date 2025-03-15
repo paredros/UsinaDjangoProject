@@ -44,6 +44,8 @@ class Proyecto(models.Model):
     anio = models.IntegerField(null=True, blank=True)
     fecha = models.DateField(null=True, blank=True)
     locacion = models.CharField(max_length=250, default="", null=True, blank=True)
+    ciudad = models.CharField(max_length=250, default="", null=True, blank=True)
+    pais = models.CharField(max_length=250, default="", null=True, blank=True)
     locacion_ampliada = models.CharField(max_length=250, default="", null=True, blank=True)
     entes = models.TextField(default="", null=True, blank=True)
     artistas = models.TextField(default="", null=True, blank=True)
