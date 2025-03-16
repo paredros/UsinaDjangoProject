@@ -124,7 +124,7 @@ function init() {
                 markers: false,
             }
         })
-        let proyectos = gsap.utils.toArray("#proyectosMain proyecto");
+        let proyectos = gsap.utils.toArray("#"+carrouseles[i]["anchor_main"]+" proyecto");
         let getLength=()=>{
             return proyectos.length*$(window).height()*1;
         }
