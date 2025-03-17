@@ -165,8 +165,79 @@ function init() {
         })
     }
 
+    const doAlgoritms=function(w){
+            const dAlgoritmos=new SplitType(w+" #titulo")
+            const dAlgoritmosW=new SplitType(w+" texto",{ types: 'words' })
+            gsap.to(dAlgoritmos.chars,{
+                y:0,
+                opacity:1,
+                transformOrigin:"bottom",
+                scaleY:1.0,
+                stagger:0.05,
+                ease:"power2.out",
+                duration:0.1,
+                scrollTrigger:{
+                    trigger:w+" #titulo",
+                    start:"top 50%",
+                    end:"top 0%",
+                    toggleActions: "play none none reverse"
+                }
+            })
+            let tracker=gsap.to(dAlgoritmosW.words,{
+                y:0,
+                opacity:1,
+                transformOrigin:"bottom",
+                scaleY:1.0,
+                stagger:0.3,
+                delay:0.2,
+                backgroundColor:"#0000",
+                ease:"power2.in",
+                duration:1,
+                scrollTrigger:{
+                    trigger:w+" texto",
+                    start:"top 70%",
+                    end:"top 0%",
+                    toggleActions: "play none none reverse"
+                }
+            })
+            pinverts_trackers_main.push(tracker);
+            const tt=ScrollTrigger.create({
+                trigger:w,
+                start:"top 0%",
+                pin: true,
+                scrub:5,
+                pinSpacing: false,
+                toggleClass:"no-border-radius",
+                end:"bottom 0%",
+                /*snap: {
+                    snapTo: 1,
+                    duration: 0.4,
+                    delay:0.2,
+                    ease: "power1.inOut"
+                },*/
+                markers:false
+            })
+            pinverts_trackers.push(tt);
 
-
+    }
+    for(let i=0;i<pinverts.length;i++){
+        doAlgoritms(pinverts[i]);
+    }
+    for(let i=0;i<extraTrackers.length;i++){
+        gsap.to(customTrackers[extraTrackers[i]],
+            {
+                value:1,
+                ease:"power.in",
+                scrollTrigger:{
+                    trigger:"#"+extraTrackers[i],
+                    start:"top 100%",
+                    end:"bottom -50%",
+                    scrub:1,
+                    markers: false,
+                }
+            }
+        )
+    }
     //ESTO VA AL FINAL
     ScrollTrigger.batch("slide-text1 p", {
         start:"-100% 50%",

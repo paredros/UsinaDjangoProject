@@ -1,0 +1,13 @@
+<section-pin-vert id="{{ bloque_data.id }}" class="{{ bloque_data.style1 }}">
+    <slide-title-text class="{{ bloque_data.style2 }}">
+        <h1 id="titulo">
+            {{ bloque_data.titulo | safe }}
+        </h1>
+        <texto>
+            {{ bloque_data.texto | safe }}
+        </texto>
+    </slide-title-text>
+</section-pin-vert>
+<script>
+    pinverts.push("#{{ bloque_data.id }}")
+</script>

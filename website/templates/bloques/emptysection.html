@@ -1,9 +1,15 @@
 {% if bloque_data.type == "HALF" %}
-     <half-section class="only-hidden">
+     <half-section {% if bloque_data.tracker is not None %} id="{{ bloque_data.tracker }}" {% endif %} class="only-hidden">
     </half-section>
 {% elif bloque_data.type == "HALF2"%}
-    <half2-section class="only-hidden">
+    <half2-section {% if bloque_data.tracker is not None %} id="{{ bloque_data.tracker }}" {% endif %} class="only-hidden">
     </half2-section>
 {% elif bloque_data.type == "FULL"%}
-    <section class="only-hidden"></section>
+    <section {% if bloque_data.tracker is not None %} id="{{ bloque_data.tracker }}" {% endif %} class="only-hidden"></section>
+{% endif %}
+{% if bloque_data.tracker is not None %}
+    <script>
+        customTrackers["{{ bloque_data.tracker }}"]={value:0};
+        extraTrackers.push('{{ bloque_data.tracker }}');
+    </script>
 {% endif %}
