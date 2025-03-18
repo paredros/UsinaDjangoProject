@@ -15,6 +15,13 @@ def get_file_path2(instance, filename):
     filename = "%s.%s" % (uuid.uuid4(), ext)
     return os.path.join('images/proyectos/archivos/'+instance.proyecto.slug, filename)
 
+def get_file_path_nota(instance, filename):
+    ext = filename.split('.')[-1]
+    #print(instance.slug)
+    #filename = "%s.%s" % (uuid.uuid4(), ext)
+    filename = "%s.%s" % (instance.slug, ext)
+    return os.path.join('images/notas', filename)
+
 
 # Create your models here.
 
@@ -60,8 +67,20 @@ class Proyecto(models.Model):
         return self.slug
 
 
-
 class ProyectoImagenArchivo(models.Model):
     proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to=get_file_path2)
 
+
+class Nota(models.Model):
+    titulo = models.CharField(max_length=120)
+    slug = models.CharField(max_length=120, unique=True)
+    slide_text = models.CharField(max_length=200, null=True, blank=True)
+    subtitulo = models.CharField(max_length=200, null=True, blank=True)
+    copete = models.TextField(null=True, blank=True)
+    texto = models.TextField()
+    imagen_principal = models.ImageField(upload_to=get_file_path_nota)
+    orden_portada = models.IntegerField(default=-1)
+
+    def __str__(self):
+        return self.slug + " - " + str(self.orden_portada)

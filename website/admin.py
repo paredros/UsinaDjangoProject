@@ -22,3 +22,8 @@ class ProyectoAdmin(admin.ModelAdmin):
 class TagsAdmin(admin.ModelAdmin):
     class Meta:
         model = Tags
+
+@admin.register(Nota)
+class NotaAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Nota

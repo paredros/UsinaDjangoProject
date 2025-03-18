@@ -50,7 +50,9 @@
     {% if data.bloques is not None %}
         {% for bloque in data.bloques %}
             {% if bloque.file is not None %}
-                {% include bloque.file with bloque_data=bloque %}
+                {% if bloque.skip is not True %}
+                    {% include bloque.file with bloque_data=bloque %}
+                {% endif %}
             {% endif %}
         {% endfor %}
     {% endif %}
@@ -87,6 +89,12 @@
 
             todo.show()
             $(document).scrollTop(scroll_pos);
+        }
+        function TryNavigation(direction){
+
+        }
+        function TryOpenNota(direction) {
+
         }
     </script>
 </body>

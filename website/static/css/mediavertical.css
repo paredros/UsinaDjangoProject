@@ -218,7 +218,9 @@
   }
 
   @media (max-aspect-ratio: 7/6) {
-
+    .endpage .dataGroup {
+        width: 90%;
+    }
     .endpage .dataGroup .data{
         height:130px;
         
@@ -248,7 +250,7 @@
         height: min(10vw, 50px);
     }
     .endpage .dataGroup:hover .data{
-        width: 80% !important;
+        /*width: 80% !important;*/
         /*height: max(15vw,90px);*/
     }
     .endpage .dataGroup:hover group{

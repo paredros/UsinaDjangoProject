@@ -2,8 +2,18 @@
     <slide-text1>
         {% if bloque_data.lineas is not None %}
             {% for linea in bloque_data.lineas %}
-                <p class="{{ linea.style }}">{{ linea.texto|safe }}</p>
+                {% if linea.style == "blank" %}
+                    <div>&nbsp;</div>
+                {% else %}
+                    <p class="{{ linea.style }}">{{ linea.texto|safe }}</p>
+                {% endif %}
             {% endfor %}
         {% endif %}
     </slide-text1>
 </section>
+{% if bloque_data.tracker is not None %}
+    <script>
+        customTrackers["{{ bloque_data.tracker }}"]={value:0};
+        extraTrackers.push('{{ bloque_data.tracker }}');
+    </script>
+{% endif %}

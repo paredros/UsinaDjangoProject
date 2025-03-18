@@ -1,0 +1,87 @@
+{% load static %}
+
+<div class="endpage">
+        <div class="subLeft">
+          <div class="subTop"></div>
+          <div class="subBottom">
+            <bloque></bloque>
+          </div>
+        </div>
+        <div class="subMid">
+            {% for linea in bloque_data.lineas %}
+                {% if linea.tipo == "titulo" %}
+                    <div class="dataGroup"  id="endpage-{{ linea.navdir }}">
+                        <div class="data">
+                            <indice>{{ linea.indice }}</indice>
+                            <lineaCorta></lineaCorta>
+                            <lineaLarga></lineaLarga>
+                            <group>{{ linea.titulo }}</group>
+                            <datos>{{ linea.datos | safe}}</datos>
+
+                            <botonir><img src = {% static "svgs/arrows/arrowIrClaro.svg" %} /></botonir>
+
+                            <textoir>{{ linea.textoir }}</textoir>
+                        </div>
+                    </div>
+                    <script>
+                        document.getElementById("endpage-{{ linea.navdir }}").onclick = function(){
+                            alert("{{ linea.navdir}}");
+                            TryNavigation("{{ linea.navdir }}");
+                        }
+                    </script>
+                {% elif linea.tipo == "tags" %}
+                    <tags>
+                    {% for tag in bloque_data.data.tags.all %}
+                        <span>{{ tag }}</span>
+                    {% endfor %}
+                    </tags>
+                {% elif linea.tipo == "soluciones" %}
+                    <servicios>
+                    {% for servicio in bloque_data.data.servicios %}
+                        <span>{{ servicio.titulo }}</span>
+                    {% endfor %}
+                    </servicios>
+                {% elif linea.tipo == "sublinks" %}
+                    <sublinks>
+                        {% for sublink in linea.links %}
+                            <span id="sublink-{{ sublink.navdir }}">{{ sublink.texto }}</span>
+                            <script>
+                                document.getElementById("sublink-{{ sublink.navdir }}").onclick = function(){
+                                    alert("{{ sublink.navdir}}");
+                                    TryNavigation("{{ sublink.navdir }}");
+                                }
+                            </script>
+                        {% endfor %}
+                    </sublinks>
+                {% elif linea.tipo == "notas" %}
+                    <div class="notas">
+                        {% for nota in bloque_data.data.notas %}
+                            <notamini id="nota-{{nota.slug}}">
+                              <img src="{{ nota.imagen_principal.url }}"  alt="">
+                              <titulo>{{ nota.titulo}}</titulo>
+                              <copete>{{ nota.copete}}</copete>
+                              <over><span>ABRIR</span><p>{{ nota.titulo}}</p></over>
+                            </notamini>
+                            <script>
+                                document.getElementById("nota-{{ nota.slug }}").onclick = function(){
+                                    alert("{{ nota.slug}}");
+                                    TryOpenNota("{{ nota.slug }}");
+                                }
+                            </script>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+        <div class="subRight">
+          <div class="subTop">
+            <bloque>
+              <circulo></circulo>
+            </bloque>
+          </div>
+          <div class="subBottom">
+
+          </div>
+        </div>
+    </div>

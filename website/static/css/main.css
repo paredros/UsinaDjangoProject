@@ -819,7 +819,7 @@ slide-title-text texto .word{
     height: 130px;
     
     background-color: #ffffff00;
-    width: 90%;
+    /*width: 90%;*/
     transition: 0.3s;
     color: var(--thirdColor);
     
@@ -903,7 +903,7 @@ slide-title-text texto .word{
     cursor: pointer;
     color: var(--thirdColor);
     background-color: var(--secondColor);
-    width: 70% !important;
+    /*width: 70% !important;*/
     
 }
 .endpage .dataGroup:hover lineaCorta {
