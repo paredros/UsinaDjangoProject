@@ -84,5 +84,10 @@
     {% else %}
         carrousel.customTrackers=""
     {% endif %}
+    {% if bloque_data.pretracker is not None %}
+        carrousel.pretracker="{{ bloque_data.pretracker }}";
+    {% else %}
+        carrousel.pretracker=""
+    {% endif %}
 
 </script>

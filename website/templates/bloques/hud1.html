@@ -1,0 +1,118 @@
+{% load static %}
+
+<section class="HUD">
+    <div id="LogoUMini" class="hideAnimOutTop"><img src ="{% static 'svgs/logos/LogoUBlueDark.svg' %}" alt="U"/></div>
+    <!--buttonNavFooter id="ButtonAdvance"><p><i class="bi bi-chevron-down" ></i></p></buttonNavFooter-->
+    <div class="wrapper" id="scrollMe">
+        <div class="boxes">
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box"><i class="bi bi-chevron-down"></i></div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box"><i class="bi bi-chevron-down" ></i></div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box"><i class="bi bi-chevron-down" ></i></div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box"><i class="bi bi-chevron-down" ></i></div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box"><i class="bi bi-chevron-down" ></i></div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box"><i class="bi bi-chevron-down" ></i></div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box"><i class="bi bi-chevron-down" ></i></div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box"><i class="bi bi-chevron-down" ></i></div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box"><i class="bi bi-chevron-down" ></i></div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box"><i class="bi bi-chevron-down" ></i></div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box"><i class="bi bi-chevron-down" ></i></div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box"><i class="bi bi-chevron-down" ></i></div>
+
+
+            <!--div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div>
+            <div class="box">SCROLL</div>
+            <div class="box">DOWN</div-->
+
+
+        </div>
+    </div>
+  </section>
+<script>
+    let bannerScrollTimer=null;
+    function initMarquee(boxWidth, time) {
+        const boxElement = $('.box');
+        const boxLength = boxElement.length;
+        const wrapperWidth = boxWidth * boxLength;
+        const windowWidth = $(window).width();
+
+        boxElement.parent().css('left', '-' + boxWidth + 'px');
+        boxElement.css('width', boxWidth + 'px');
+
+        gsap.set(".box", {
+            x: (i) => i * boxWidth
+        });
+
+        bannerScrollTimer=gsap.to(".box", {
+            duration: time,
+            ease: "none",
+            x: "-=" + wrapperWidth,
+            modifiers: {
+                x: gsap.utils.unitize(
+                    function (x) {
+                        return parseFloat(x + windowWidth + boxWidth) % wrapperWidth
+                    }
+                )
+            },
+            repeat: -1
+        });
+
+    }
+    globalOnPreInitRun.push(()=>{
+        initMarquee(60,27)
+    })
+    const scrollBanner=$("#scrollMe");
+    const logoMini=$("#LogoUMini");
+    function scrollMeAppShow(){
+        scrollBanner.removeClass("hideAnimOutBootm");
+        bannerScrollTimer.play();
+    }
+    function scrollMeAppHide(){
+        scrollBanner.addClass("hideAnimOutBootm");
+        bannerScrollTimer.pause();
+    }
+    function hudAppHide(){
+        logoMini.addClass("hideAnimOutTop");
+    }
+    function hudAppShow(){
+        logoMini.removeClass("hideAnimOutTop");
+    }
+</script>

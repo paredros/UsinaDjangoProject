@@ -84,3 +84,25 @@ class Nota(models.Model):
 
     def __str__(self):
         return self.slug + " - " + str(self.orden_portada)
+
+class Direcciones(models.Model):
+    ciudad = models.CharField(max_length=120)
+    pais = models.CharField(max_length=120)
+    calle = models.CharField(max_length=250)
+    correo = models.CharField(max_length=120)
+    telefono = models.CharField(max_length=120)
+    publicado = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.ciudad
+
+class Bloques(models.Model):
+    titulo = models.CharField(max_length=120)
+    json = models.TextField(default="")
+    TYPE_LIST = [('esp', 'ESPAÑOL'),
+                 ('por', 'PORTUGUESE'),
+                 ('eng', 'ENGLISH'),
+                 ]
+    lenguaje = models.CharField(max_length=30, choices=TYPE_LIST, default='esp')
+    def __str__(self):
+        return self.titulo

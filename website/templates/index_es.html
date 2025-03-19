@@ -44,7 +44,7 @@
     {% if data.preload %}
     {% include data.preload.file with preload_data=data.preload%}
     {% endif %}
-
+    <canvas id="bg"></canvas>
     <div id="MainPage">
 
     {% if data.bloques is not None %}
@@ -57,13 +57,13 @@
         {% endfor %}
     {% endif %}
 
-    <section></section>
-    <section></section>
-    <section></section>
+
     </div>
     <div id="NextPage">
 
     </div>
+    {% include "bloques/footerblue.html" %}
+    {% include "bloques/hud1.html" %}
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -71,6 +71,7 @@
     <script src="https://unpkg.com/split-type"></script>
 
     <script src="{% static 'js/textFit.js' %}"></script>
+    <script src="{% static 'js/fondomanager1.js' %}" type="module"></script>
     <script src="{% static 'js/homepage.js' %}" type="module"></script>
     <script>
         todo = $("#MainPage")

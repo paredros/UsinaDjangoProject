@@ -111,9 +111,9 @@ function init() {
     }
     for(let i=0;i<carrouseles.length;i++){
         //carrouseles[i]();
-        console.log(carrouseles[i]);
-        console.log(carrouseles[i]["section_type"]);
-        gsap.from(carrouseles[i]["section_type"],{
+        //console.log(carrouseles[i]);
+        //console.log(carrouseles[i]["section_type"]);
+        const pretrack=gsap.from(carrouseles[i]["section_type"],{
             scale: 0.5,
             ease:"power.in",
             scrollTrigger:{
@@ -124,6 +124,10 @@ function init() {
                 markers: false,
             }
         })
+        if(carrouseles[i]["pretracker"]!=""){
+            //console.log(carrouseles[i]["pretracker"])
+            customTrackers[carrouseles[i]["pretracker"]]=pretrack;
+        }
         let proyectos = gsap.utils.toArray("#"+carrouseles[i]["anchor_main"]+" proyecto");
         let getLength=()=>{
             return proyectos.length*$(window).height()*1;
@@ -301,5 +305,5 @@ function init() {
         markers:false,
         invalidateOnRefresh:true
     })
-    console.log("TERMINO")
+    //console.log("TERMINO")
 }

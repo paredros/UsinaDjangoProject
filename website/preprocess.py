@@ -1,7 +1,9 @@
 from website.models import *
+import json
 
 
 def preprocess_general(tipo):
+
     data = {}
     if tipo == "proyectos-selected":
         data = preprocess_proyectos_selected()
@@ -9,6 +11,8 @@ def preprocess_general(tipo):
         data = preprocess_servicios_selected()
     elif tipo == "endpage":
         data = preprocess_endpage()
+    elif tipo == "contactformdata":
+        data = preprocess_contactformdata()
     return data
 
 def preprocess_proyectos_selected():
@@ -31,4 +35,14 @@ def preprocess_endpage():
     data["servicios"] = servicios
     notas = Nota.objects.all().filter(orden_portada__gt=0).order_by("orden_portada")
     data["notas"] = notas
+    return data
+
+def preprocess_contactformdata():
+    data = {}
+    direcciones = Direcciones.objects.all().filter(publicado=True).order_by("pais")
+    data["direcciones"] = direcciones
+    info = Bloques.objects.all().filter(titulo="contactformdata").first()
+
+    data["info"] = json.loads(info.json)
+
     return data

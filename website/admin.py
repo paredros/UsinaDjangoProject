@@ -27,3 +27,14 @@ class TagsAdmin(admin.ModelAdmin):
 class NotaAdmin(admin.ModelAdmin):
     class Meta:
         model = Nota
+
+@admin.register(Direcciones)
+class DireccionesAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Direcciones
+
+@admin.register(Bloques)
+class BloquesAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Bloques
+

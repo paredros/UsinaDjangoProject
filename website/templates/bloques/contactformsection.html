@@ -1,0 +1,42 @@
+<div class="footerfinal" >
+        <div class="subLeft">
+
+        </div>
+        <div class="subMid">
+
+          <panelleft>
+            <h1>{{ bloque_data.data.info.titulo }}</h1>
+            <linea></linea>
+            <input type="text" id="fname" name="firstname" placeholder="{{ bloque_data.data.info.placeholder_name }}">
+            <input type="email" id="email" name="email" placeholder="{{ bloque_data.data.info.placeholder_email }}">
+            <input type="text" id="titulo" name="titulo" placeholder="{{ bloque_data.data.info.placeholder_titulo }}">
+
+            <textarea id="msg" name="msg" placeholder="{{ bloque_data.data.info.placeholder_msg }}" ></textarea>
+
+            <input type="submit" value="{{ bloque_data.data.info.placeholder_enviar }}">
+
+          </panelleft>
+          <panelright>
+            <top>{{ bloque_data.data.info.copete | safe }}</top>
+            <linea></linea>
+            <direcciones>
+
+                {% for dir in bloque_data.data.direcciones.all %}
+                    <direccion>
+                        <ciudad>{{ dir.ciudad }}</ciudad>
+                        <pais>{{ dir.pais }}</pais>
+                        <calle>{{ dir.calle | safe }}</calle>
+                        <correo>{{ dir.correo }}</correo>
+                        <telefono>{{ dir.telefono }}</telefono>
+
+                    </direccion>
+                {% endfor %}
+
+
+            </direcciones>
+          </panelright>
+        </div>
+        <div class="subRight">
+
+        </div>
+      </div>
