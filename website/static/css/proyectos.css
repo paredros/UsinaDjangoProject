@@ -1,0 +1,337 @@
+proyectos-page{
+
+}
+proyectos-page h1{
+    font-size: 5rem;
+    line-height: 5rem;
+    font-weight: 100;
+    padding-top: 100px;
+}
+proyectos-page linea-larga{
+    display: block;
+    width: 100%;
+    line-height: 0;
+    margin: 0;
+    background-color: var(--secondColor);
+    height: 3px;
+}
+proyectos-page space{
+    display: block;
+    height: 50px;
+}
+proyectos-page tags span:hover{
+    padding: 5px !important;
+}
+proyectos-page figcaption{
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+proyectos-page figcaption h1{
+    background-color: var(--secondColor);
+    width: 100%;
+    font-size: 4rem;
+    margin: 0;
+    padding: 0;
+    color: var(--thirdColor);
+}
+proyectos-page figcaption h1 span{
+    margin-top: 30px;
+    margin-bottom: 0px;
+    padding: 0;
+}
+proyectos-page opciones{
+    padding-top: 10px;
+    display:block;
+    font-size: 1rem;
+    line-height: 2rem;
+    text-align: right;
+}
+proyectos-page opciones opcion{
+    font-size: 1.1rem;
+    padding: 0 5px;
+    background-color: var(--secondColor);
+    color: var(--thirdColor);
+    transition: 0.5s;
+}
+proyectos-page opciones opcion:hover{
+    cursor: pointer;
+    background-color: var(--fourthColor);
+    color: var(--secondColor);
+}
+proyectos-page content{
+    flex:1;
+    /*width: 80%;*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    margin-left: 0;
+    margin-bottom: 100px;
+}
+.opcionSelected{
+    background-color: var(--mainColor);
+    font-weight: bold;
+    padding-right: 0px;
+    
+}
+.opcionSelected:hover::after{
+    background-color: var(--thirdColor);
+}
+.opcionSelected::after{
+    content: "x";
+    margin-left: 5px;
+    background-color: var(--secondColor);
+    transition: 0.3s;
+    padding: 0 5px;
+}
+.tagselected{
+    padding-right: 0px !important;
+}
+.tagselected:hover{
+    padding-right: 0px !important;
+}
+.tagselected:hover::after{
+    background-color: var(--thirdColor) !important;
+    color: var(--mainColor) !important;
+}
+.tagselected::after{
+    content: "x";
+    margin-left: 5px;
+    padding: 5px;
+    background-color: var(--mainColor);
+    transition: 0.3s;
+}
+content_mini{
+
+    /*margin-left: 7%;*/
+    display: block;
+    overflow: hidden;
+    position: relative;
+
+    /*margin-bottom: 10px;*/
+    /*flex: 1 1 100%;*/
+    flex: 1 1;
+    min-width: 300px;
+    /*max-width: 500px;*/
+    height: 300px;
+    /*margin-left: 2%;*/
+    margin: 10px;
+    
+    
+}
+content_mini bg{
+    width: 100%;
+    height: 100%;
+}
+content_mini bg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+content_mini titulo{
+    position:absolute;
+    left: 10px;
+    top: 10px;
+    width: 80%;
+    font-size: 2.5rem;
+    line-height: 3rem;
+    color: var(--thirdColor);
+    font-weight: 100;
+}
+content_mini titulo span{
+    background-color: var(--mainColor);
+}
+content_mini fecha{
+    position:absolute;
+    text-align: right;
+    right: 10px;
+    bottom: 10px;
+    /*width: 80%;*/
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    color: var(--thirdColor);
+    font-weight: bold;
+    padding: 5px;
+    background-color: var(--mainColor);
+}
+content_mini over{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 0%;
+    background-color: var(--fourthColor);
+    overflow: hidden;
+    transition: 0.1s;
+    
+}
+content_mini over span{
+    padding: 5px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--secondColor);
+}
+content_mini over p{
+    padding: 5px;
+    font-size: 2rem;
+    font-weight: 100;
+    color: var(--secondColor);
+    line-height: 2rem;
+    position: absolute;
+    margin: 0px;
+    bottom: 0px
+}
+content_mini:hover{
+    cursor: pointer;
+}
+content_mini:hover over{
+    height: 100% !important;
+}
+content-navbar{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+content-navbar span{
+    background-color: var(--secondColor);
+    color: var(--thirdColor);
+    font-size: 2rem;
+    padding: 0 5px;
+    transition: 0.5s;
+}
+content-navbar span:hover{
+    cursor: pointer;
+    background-color: var(--fourthColor);
+    color: var(--secondColor);
+}
+content-detalle {
+    display: block;
+    margin-top: 50px;
+}
+content-detalle titulo{
+    
+    font-size: 5rem;
+    line-height: 5rem;
+}
+content-detalle titulo span{
+    background-color: var(--mainColor);
+    color: var(--thirdColor);
+}
+content-detalle img{
+    width: 100%;
+}
+content-detalle h2{
+    font-weight: 100;
+    font-size: 5rem;
+    line-height: 5rem;
+    
+}
+content-detalle h3{
+    font-weight: 100;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    
+}
+content-detalle data{
+    display: flex;
+    font-weight: 100;
+    flex-direction: column;
+    background-color: var(--mainColor);
+    padding: 5px;
+    color: var(--thirdColor);
+    font-size: 2rem;
+    line-height: 2rem;
+}
+content-detalle imagenes-archivo{
+    /*flex:1;*/
+    /*width: 80%;*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    margin-left: 0;
+    margin-bottom: 100px;
+}
+content-detalle imagenes-archivo img{
+    display: block;
+    overflow: hidden;
+    position: relative;
+
+    flex: 1 1;
+    min-width: 300px;
+
+    height: 300px;
+
+    margin: 10px;
+    object-fit: cover;
+    transition: 0.7s;
+}
+content-detalle imagenes-archivo img:hover{
+    flex: 10 10;
+    /*transform: scale(1.5);
+    z-index: 99;*/
+}
+content-detalle texto-largo{
+    /*flex:1;*/
+    /*width: 80%;*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    margin-left: 0;
+    margin-bottom: 100px;
+}
+content-detalle texto-largo p{
+    display: block;
+    /*overflow: hidden;*/
+    position: relative;
+
+    flex: 1 1;
+    /*min-width: min(500px, 80vw);*/
+    min-width: 300px;
+
+    height: fit-content;
+
+    margin: 20px;
+    margin-bottom: 30px;
+    object-fit: cover;
+    transition: 0.7s;
+}
+content-detalle texto-largo p indice{
+    position: absolute;
+    content: "1";
+    left: -20px;
+    top: 0px;
+    font-weight: bold;
+}
+
+@media (max-aspect-ratio: 6/7){
+
+    
+    proyectos-page content{
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    content-detalle titulo{
+    
+        font-size: 3rem;
+        line-height: 3rem;
+    }
+    content-detalle h2{
+        font-size: 3rem;
+        line-height: 3rem;
+    }
+    content-detalle data{
+        font-size: 1.25rem;
+        line-height: 1.25rem;
+    }
+}
+@media (max-aspect-ratio: 7/6){
+    proyectos-page h1{
+        font-size: 3rem;
+        line-height: 3rem;
+    }
+}

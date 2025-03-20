@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+
+<!--html lang="es" class="prevent-scroll-y"-->
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USINA</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/"
+          }
+        }
+      </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"-->
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/preload.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mediavertical.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mediahorizontalextra.css' %}">
+    <link rel="stylesheet" href="{% static 'css/proyectos.css' %}">
+
+</head>
+<body>
+    <script>
+        //tagsList={};
+        function clickOnTag(tag){
+            //alert(tag);
+            filterList.push(tag)
+            processFilter()
+        }
+        proy = {}
+        proyList = []
+        filterList=[];
+        function processFilter(){
+            for(var i=0;i<proyList.length;i++) {
+                let tags=0;
+                for(var j=0;j<proyList[i]["tags"].length;j++) {
+                    let tag = proyList[i]["tags"][j]
+                    for(var n=0;n<filterList.length;n++) {
+                        if(tag==filterList[n]){
+                            tags++;
+                        }
+                    }
+                }
+                if(tags==filterList.length){
+                    proyList[i]["visible"]=true;
+                    $("#"+proyList[i]["slug"]).show()
+                }else{
+                    proyList[i]["visible"]=false;
+                    $("#"+proyList[i]["slug"]).hide()
+                }
+            }
+        }
+    </script>
+<section-large>
+    <proyectos-page>
+
+        <!--h1>DEL SUEÑO AL PROYECTO Y DEL PROYECTO A LA REALIDAD</h1-->
+        <h1>{{ base.copete | safe }}</h1>
+        <!--linea-larga></linea-larga-->
+        <figcaption><h1>{{ base.titulo | safe }}</h1></figcaption>
+        <p></p>
+        <linea-larga></linea-larga>
+        <tags>
+
+
+            {% for tag in tags %}
+                <a id="myLink" title="{{ base.filtra }}"
+                   href="#" onclick="clickOnTag('{{ tag }}');return false;"><span id="tag-{{ tag }}">{{ tag }}</span></a>
+            {% endfor %}
+
+        </tags>
+        <space></space>
+        <linea-larga></linea-larga>
+        <opciones>{{ base.ordenar}} <opcion class="opcionSelected">{{ base.nombre }}</opcion> <opcion>{{ base.fecha }}</opcion>
+            | {{ base.direccion }} <opcion class="opcionSelected">{{ base.asc }}</opcion> <opcion>{{ base.des }}</opcion>
+        </opciones>
+        <space></space>
+        <content id="holder1">
+            {% for proyecto in proyectos %}
+                <content_mini id="{{ proyecto.slug }}">
+                    <bg>
+                        <img src="{{ proyecto.imagen_principal.url }}" alt="">
+                    </bg>
+                    <titulo>
+                        <span>{{ proyecto.titulo }}</span>
+                    </titulo>
+                    {% if proyecto.anio is not None %}
+                    <fecha>
+                        {{ proyecto.anio }}
+                    </fecha>
+                    {% endif %}
+                <over><span>{{ base.abrir }}</span><p>{{ proyecto.titulo }}</p></over>
+                </content_mini>
+                <script>
+                    proy["{{ proyecto.slug }}"]={};
+                    proy["{{ proyecto.slug }}"]["slug"]="{{ proyecto.slug }}";
+                    proy["{{ proyecto.slug }}"]["visible"]=true;
+                    proy["{{ proyecto.slug }}"]["tags"]=[{% for tag in proyecto.tags.all %}"{{ tag }}",{% endfor %}]
+                    proyList.push(proy["{{ proyecto.slug }}"])
+                </script>
+            {% endfor %}
+        </content>
+        <content id="holder2" class="invisible_real">
+            <content-navbar>
+                <span class="backButtonTest">{{ base.back }}</span>
+                <span>{{ base.next }}</span>
+            </content-navbar>
+            <linea-larga></linea-larga>
+            <content-detalle>
+                <titulo>
+                    <span>DOMO LEY MICAELA</span>
+                </titulo>
+                <!--img src="public/works/nunsacat/nunsacat1.jpg" alt=""-->
+                <h2>UN LUGAR PARA CUESTIONAR</h2>
+                <h3>La igualdad de género no se aprende en un manual ni se memoriza en una charla.<br>
+                    Se experimenta, se cuestiona y se transforma, por eso diseñamos el Domo Interactivo.<br>
+                    No es un museo, no es una clase, no es un discurso.<br>
+                    Es un espacio vivo, tecnológico e intuitivo, donde la reflexion no se impone, si no que te encuentra.</h3>
+                <!--linea-larga></linea-larga-->
+                <data>
+                    <space></space>
+                    <fecha>FECHA: <b>MARZO 2021</b></fecha>
+                    <ubicacion>UBICACION: <b>SANTA FE</b> | <b>ARGENTINA</b></ubicacion>
+                    <entes>PARTICIPARON: <b>MINISTERIO DE IGUALDAD, GENERO Y DIVERSIDAD DEL GOBIERNO DE SANTA FE</b></entes>
+                </data>
+                <tags>
+                    <span>Arte</span>
+                    <span>Tecnologia</span>
+                    <span>Social</span>
+                    <span>EspacioPublico</span>
+                    <span>Exposicion</span>
+                    <span>Data</span>
+                    <span>MedioAmbiente</span>
+                    <span>Educacion</span>
+
+
+                </tags>
+                <!--linea-larga></linea-larga-->
+                <imagenes-archivo>
+                    <!--img src="public/works/cassiopea/cassio1.JPG" alt=""-->
+                    <!--img src="public/works/cassiopea/cassio5.png" alt=""-->
+                </imagenes-archivo>
+                <!--h2 style="text-align: right;">DESAPRENDER LO APRENDIDO</h2-->
+                <h2>DESAPRENDER LO APRENDIDO</h2>
+                <!--p>Usina estuvo a cargo de la Investigación y  el desarrollo del proyecto sobre la Ley Micaela, con el objetivo de traducir lo complejo de la ley a un dispositivo lúdico e interactivo, montado en un espacio público para lograr la mayor convocatoria posible.
+                    <br><br>La información se presenta de manera atractiva, asegurando que el contenido sea entretenido y visualmente impactante. Además, se coordinó la invitación del público y la comercialización del proyecto.
+                    <br><br>El domo dentro contaba con varias secciones entre ellas: "Educación Sexual Integral (ESI)": Historias interactivas donde cada decisión cambia el curso de los hechos.
+                    <br><br>Por otro lado, "Instalación responsiva – Palabras en el cuerpo va": Una experiencia artística interactiva sobre el poder de las palabras.
+                    <br><br>Un espacio para pensar, y experimentar cómo el lenguaje moldea nuestra forma de ver el mundo.  Seguido de "tipos de violencia": Animaciones en formato cómic donde hay que identificar diferentes tipos de violencia en situaciones cotidianas.
+                    <br><br>Tambien se contaba con un "Microcine: Las mujeres en la historia": Relatos audiovisuales sobre las mujeres que marcaron hitos en distintos momentos de la historia, pero cuyas contribuciones muchas veces fueron ignoradas.
+                    <br><br>"Totem de preguntas": Un tótem que registra en video o audio la respuesta de la gente a preguntas clave sobre género y derechos.
+                    <br><br>Por ultimo, se desarrolló una experiencia de realidad virtual  donde la persona experimentaba lo que una mujer caminando, entre ellas el acoso callejero.</p-->
+
+                <texto-largo>
+                    <p><indice>1</indice>Usina estuvo a cargo de la Investigación y  el desarrollo del proyecto sobre la Ley Micaela, con el objetivo de traducir lo complejo de la ley a un dispositivo lúdico e interactivo, montado en un espacio público para lograr la mayor convocatoria posible. </p>
+                    <p><indice>2</indice>La información se presenta de manera atractiva, asegurando que el contenido sea entretenido y visualmente impactante. Además, se coordinó la invitación del público y la comercialización del proyecto.</p>
+                    <p><indice>3</indice>El domo dentro contaba con varias secciones entre ellas: "Educación Sexual Integral (ESI)": Historias interactivas donde cada decisión cambia el curso de los hechos.</p>
+                    <p><indice>4</indice>Por otro lado, "Instalación responsiva – Palabras en el cuerpo va": Una experiencia artística interactiva sobre el poder de las palabras.</p>
+                    <p><indice>5</indice>Un espacio para pensar, y experimentar cómo el lenguaje moldea nuestra forma de ver el mundo.  Seguido de "tipos de violencia": Animaciones en formato cómic donde hay que identificar diferentes tipos de violencia en situaciones cotidianas.</p>
+                    <p><indice>6</indice>Tambien se contaba con un "Microcine: Las mujeres en la historia": Relatos audiovisuales sobre las mujeres que marcaron hitos en distintos momentos de la historia, pero cuyas contribuciones muchas veces fueron ignoradas.
+                        <br><br>"Totem de preguntas": Un tótem que registra en video o audio la respuesta de la gente a preguntas clave sobre género y derechos.
+                    </p>
+                    <p><indice>7</indice>Por ultimo, se desarrolló una experiencia de realidad virtual  donde la persona experimentaba lo que una mujer caminando, entre ellas el acoso callejero.</p>
+                </texto-largo>
+            </content-detalle>
+            <linea-larga></linea-larga>
+            <content-navbar>
+                <span class="backButtonTest">{{ base.back }}</span>
+                <span>{{ base.next }}</span>
+            </content-navbar>
+
+            <space></space>
+            <space></space>
+        </content>
+    </proyectos-page>
+
+</section-large>
+
+{% include "bloques/footerblue.html" %}
+
+<script src="{% static 'js/textFit.js' %}" ></script>
+<script src="{% static 'js/proyectos.js' %}" type="module"></script>
+<script>
+    /*function textFitDo(){
+        textFit( $("figcaption h1"),{multiLine:true,detectMultiLine:true,
+         widthOnly:false,reProcess:true, alignVertWithFlexbox:false,alignVert:false});
+
+    }
+    textFitDo();*/
+    $("#clickTest").on("click",function(){
+        $("#holder1").addClass("invisible_real")
+        $("#holder2").removeClass("invisible_real")
+    })
+    $(".backButtonTest").on("click",function(){
+        $("#holder1").removeClass("invisible_real")
+        $("#holder2").addClass("invisible_real")
+    })
+</script>
+</body>
+</html>

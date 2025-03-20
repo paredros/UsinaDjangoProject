@@ -5,38 +5,49 @@
             <i class="bi bi-x-circle-fill"></i>
         </close>
         <section style="align-self: center;">
-            <img src = "public/LogoUBlueDark.svg" alt="U"/>
+            <img src = "{% static 'svgs/logos/LogoUBlueDark.svg' %}" alt="U"/>
             <div id="Idioma1">
-                <h1>IDIOMA</h1>
+                <h1>{{ menuover.idioma.titulo }}</h1>
                 <linea></linea>
-                <p>Español</p>
-                <p>Portugues</p>
+                <p>{{ menuover.idioma.esp }}</p>
+                <p>{{ menuover.idioma.por }}</p>
             </div>
         </section>
 
         <section>
-            <h1>NAVEGACION</h1>
+            <h1>{{ menuover.navegacion.titulo }}</h1>
             <linea></linea>
-            <p>HOME</p>
-            <p>PROYECTOS</p>
-            <p>SOLUCIONES</p>
-            <p>NOSOTROS</p>
-            <p>VIVO USINA</p>
-            <p>CONTACTANOS</p>
+            <p>{{ menuover.navegacion.home }}</p>
+            <p>{{ menuover.navegacion.proyectos }}</p>
+            <p>{{ menuover.navegacion.soluciones }}</p>
+            <p>{{ menuover.navegacion.nosotros }}</p>
+            <p>{{ menuover.navegacion.vivo }}</p>
+            <p>{{ menuover.navegacion.contactanos }}</p>
         </section>
 
         <section>
-            <h1>REDES SOCIALES</h1>
+            <h1>{{ menuover.redes.titulo }}</h1>
             <linea></linea>
-            <p>INSTAGRAM</p>
-            <p>YOUTUBE</p>
-            <p>LINKEDIN</p>
+            <p>{{ menuover.redes.instagram }}</p>
+            <p>{{ menuover.redes.youtube }}</p>
+            <p>{{ menuover.redes.linkedin }}</p>
         </section>
         <section id="Idioma2">
-            <h1>IDIOMA</h1>
+            <h1>{{ menuover.idioma.titulo }}</h1>
             <linea></linea>
-            <p>Español</p>
-            <p>Portugues</p>
+            <p>{{ menuover.idioma.esp }}</p>
+            <p>{{ menuover.idioma.por }}</p>
         </section>
     </holder>
   </section>
+<script>
+    function OpenMenuOver() {
+        $("#menu-over-holder").removeClass("hide-menu-over");
+    }
+    function closeMenuOver() {
+        $("#menu-over-holder").addClass("hide-menu-over");
+    }
+    $("#close-menu-over-holder").on("click", function(){
+        closeMenuOver();
+    })
+</script>

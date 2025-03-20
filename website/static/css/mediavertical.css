@@ -2,6 +2,9 @@
     /*body {
       background-color: #99f; 
     }*/
+    section-large{
+        padding: 0 clamp(2rem, 6vw, 10rem);
+    }
     slide-text1 p{
         font-size: min(10vw,8vh);
         line-height: min(10vw,8vh);
@@ -202,7 +205,7 @@
     }
     .menu-over holder section img{
         width: max(10vh, 10vw) !important;
-        padding: auto;
+        /*padding: auto;*/
         margin-left: 5vh;
     }
     #Idioma1{
@@ -308,7 +311,7 @@
 
     .footerfinal .subMid panelleft{
         width: 80vw;
-        min-width: none;
+        /*min-width: none;*/
         max-width: none;
         height: auto;
 
