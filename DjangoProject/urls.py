@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('proyectos/<slug:slug>', views.proyectos),
+    path('get_ajax_data/<slug:slug>', views.get_ajax_data),
     path('proyectos/', views.proyectos),
 ]
 urlpatterns += static(settings.MEDIA_URL,

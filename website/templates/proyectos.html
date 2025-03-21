@@ -31,15 +31,48 @@
 </head>
 <body>
     <script>
-        //tagsList={};
+        core={};
+        core.currentId=1;
+        core.labels={
+            "back":"{{ base.back }}",
+            "next":"{{ base.next }}",
+            "fecha":"{{ base.fecha }}",
+            "ubicacion":"{{ base.ubicacion }}",
+            "participaron":"{{ base.participaron }}",
+        }
+        tags={};
+        tagsList=[];
+        animando1=false;
         function clickOnTag(tag){
+            if(animando1){
+                return;
+            }
+            animando1=true;
             //alert(tag);
-            filterList.push(tag)
+            let toRemove= filterList.indexOf(tag)
+            if(toRemove>=0){
+                filterList.splice(toRemove, 1)
+                tags[tag]["status"]=1;
+            }else {
+                filterList.push(tag)
+                tags[tag]["status"]=2;
+            }
             processFilter()
+            drawTags()
         }
         proy = {}
         proyList = []
         filterList=[];
+        function hideAll(){
+            for(var i=0;i<proyList.length;i++) {
+                if(!proyList[i]["visible"]){
+                    $("#"+proyList[i]["slug"]).hide()
+                }else{
+                    $("#"+proyList[i]["slug"]).show()
+                }
+            }
+            animando1=false;
+        }
         function processFilter(){
             for(var i=0;i<proyList.length;i++) {
                 let tags=0;
@@ -54,12 +87,30 @@
                 if(tags==filterList.length){
                     proyList[i]["visible"]=true;
                     $("#"+proyList[i]["slug"]).show()
+                    $("#"+proyList[i]["slug"]).removeClass("hide_content_mini")
                 }else{
                     proyList[i]["visible"]=false;
-                    $("#"+proyList[i]["slug"]).hide()
+                    $("#"+proyList[i]["slug"]).addClass("hide_content_mini")
+                }
+            }
+            setTimeout(hideAll,300);
+        }
+
+        function drawTags(){
+            for(var i=0;i<tagsList.length;i++){
+                if(tagsList[i]["status"]==2) {
+                    $("#tag-"+tagsList[i]["slug"]).addClass("tagselected")
+                }else {
+                    $("#tag-"+tagsList[i]["slug"]).removeClass("tagselected")
+                    if(filterList.length>0){
+                        $("#tag-"+tagsList[i]["slug"]).addClass("tagsecondary")
+                    }else{
+                        $("#tag-"+tagsList[i]["slug"]).removeClass("tagsecondary")
+                    }
                 }
             }
         }
+
     </script>
 <section-large>
     <proyectos-page>
@@ -76,15 +127,21 @@
             {% for tag in tags %}
                 <a id="myLink" title="{{ base.filtra }}"
                    href="#" onclick="clickOnTag('{{ tag }}');return false;"><span id="tag-{{ tag }}">{{ tag }}</span></a>
+                <script>
+                    tags["{{ tag }}"] = {}
+                    tags["{{ tag }}"]["status"]=1;
+                    tags["{{ tag }}"]["slug"] = "{{ tag }}";
+                    tagsList.push(tags["{{ tag }}"]);
+                </script>
             {% endfor %}
 
         </tags>
-        <space></space>
+        <!--space></space>
         <linea-larga></linea-larga>
         <opciones>{{ base.ordenar}} <opcion class="opcionSelected">{{ base.nombre }}</opcion> <opcion>{{ base.fecha }}</opcion>
             | {{ base.direccion }} <opcion class="opcionSelected">{{ base.asc }}</opcion> <opcion>{{ base.des }}</opcion>
         </opciones>
-        <space></space>
+        <space></space-->
         <content id="holder1">
             {% for proyecto in proyectos %}
                 <content_mini id="{{ proyecto.slug }}">
@@ -102,15 +159,22 @@
                 <over><span>{{ base.abrir }}</span><p>{{ proyecto.titulo }}</p></over>
                 </content_mini>
                 <script>
+                    $("#{{ proyecto.slug }}").on("click", function(){
+                      OpenProyect("{{ proyecto.slug }}");
+                    })
+
                     proy["{{ proyecto.slug }}"]={};
                     proy["{{ proyecto.slug }}"]["slug"]="{{ proyecto.slug }}";
                     proy["{{ proyecto.slug }}"]["visible"]=true;
                     proy["{{ proyecto.slug }}"]["tags"]=[{% for tag in proyecto.tags.all %}"{{ tag }}",{% endfor %}]
+
+
                     proyList.push(proy["{{ proyecto.slug }}"])
                 </script>
             {% endfor %}
         </content>
-        <content id="holder2" class="invisible_real">
+        <!--content id="holder2" class="content-closed" style="display: none;">
+            <space></space>
             <content-navbar>
                 <span class="backButtonTest">{{ base.back }}</span>
                 <span>{{ base.next }}</span>
@@ -120,13 +184,13 @@
                 <titulo>
                     <span>DOMO LEY MICAELA</span>
                 </titulo>
-                <!--img src="public/works/nunsacat/nunsacat1.jpg" alt=""-->
+                <img src="public/works/nunsacat/nunsacat1.jpg" alt="">
                 <h2>UN LUGAR PARA CUESTIONAR</h2>
                 <h3>La igualdad de género no se aprende en un manual ni se memoriza en una charla.<br>
                     Se experimenta, se cuestiona y se transforma, por eso diseñamos el Domo Interactivo.<br>
                     No es un museo, no es una clase, no es un discurso.<br>
                     Es un espacio vivo, tecnológico e intuitivo, donde la reflexion no se impone, si no que te encuentra.</h3>
-                <!--linea-larga></linea-larga-->
+
                 <data>
                     <space></space>
                     <fecha>FECHA: <b>MARZO 2021</b></fecha>
@@ -145,21 +209,13 @@
 
 
                 </tags>
-                <!--linea-larga></linea-larga-->
+
                 <imagenes-archivo>
-                    <!--img src="public/works/cassiopea/cassio1.JPG" alt=""-->
-                    <!--img src="public/works/cassiopea/cassio5.png" alt=""-->
+                    <img src="public/works/cassiopea/cassio1.JPG" alt="">
+                    <img src="public/works/cassiopea/cassio5.png" alt="">
                 </imagenes-archivo>
-                <!--h2 style="text-align: right;">DESAPRENDER LO APRENDIDO</h2-->
+
                 <h2>DESAPRENDER LO APRENDIDO</h2>
-                <!--p>Usina estuvo a cargo de la Investigación y  el desarrollo del proyecto sobre la Ley Micaela, con el objetivo de traducir lo complejo de la ley a un dispositivo lúdico e interactivo, montado en un espacio público para lograr la mayor convocatoria posible.
-                    <br><br>La información se presenta de manera atractiva, asegurando que el contenido sea entretenido y visualmente impactante. Además, se coordinó la invitación del público y la comercialización del proyecto.
-                    <br><br>El domo dentro contaba con varias secciones entre ellas: "Educación Sexual Integral (ESI)": Historias interactivas donde cada decisión cambia el curso de los hechos.
-                    <br><br>Por otro lado, "Instalación responsiva – Palabras en el cuerpo va": Una experiencia artística interactiva sobre el poder de las palabras.
-                    <br><br>Un espacio para pensar, y experimentar cómo el lenguaje moldea nuestra forma de ver el mundo.  Seguido de "tipos de violencia": Animaciones en formato cómic donde hay que identificar diferentes tipos de violencia en situaciones cotidianas.
-                    <br><br>Tambien se contaba con un "Microcine: Las mujeres en la historia": Relatos audiovisuales sobre las mujeres que marcaron hitos en distintos momentos de la historia, pero cuyas contribuciones muchas veces fueron ignoradas.
-                    <br><br>"Totem de preguntas": Un tótem que registra en video o audio la respuesta de la gente a preguntas clave sobre género y derechos.
-                    <br><br>Por ultimo, se desarrolló una experiencia de realidad virtual  donde la persona experimentaba lo que una mujer caminando, entre ellas el acoso callejero.</p-->
 
                 <texto-largo>
                     <p><indice>1</indice>Usina estuvo a cargo de la Investigación y  el desarrollo del proyecto sobre la Ley Micaela, con el objetivo de traducir lo complejo de la ley a un dispositivo lúdico e interactivo, montado en un espacio público para lograr la mayor convocatoria posible. </p>
@@ -181,7 +237,7 @@
 
             <space></space>
             <space></space>
-        </content>
+        </content-->
     </proyectos-page>
 
 </section-large>
@@ -197,6 +253,33 @@
 
     }
     textFitDo();*/
+
+    function OpenProyect(slug){
+        $("#holder1").addClass("content-closed")
+        setTimeout(OpenProyect2,300)
+
+        fetch("/get_ajax_data/"+slug, {
+          method: "GET",
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          //console.log(data.imagenes);
+            if(data["status"] == "ok"){
+                //console.log(data);
+                core.buildContent(data);
+            }
+
+        });
+    }
+    function OpenProyect2(){
+        $("#holder1").hide()
+        $("#holder2").show()
+        $("#holder2").removeClass("content-closed")
+    }
+
     $("#clickTest").on("click",function(){
         $("#holder1").addClass("invisible_real")
         $("#holder2").removeClass("invisible_real")

@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import json
 
 from website.models import Scrollytelling, Bloques, Tags, Proyecto
 from website.preprocess import preprocess_general
+
+from django.core import serializers
 
 
 # Create your views here.
@@ -24,7 +26,6 @@ def index(request):
     return render(request, "index_es.html", {"testeo":"Que onda", "data":test})
 
 def proyectos(request, slug=None):
-    print(slug)
     data = {}
     info = Bloques.objects.all().filter(titulo="proyectoshome", lenguaje="esp").first()
     data["base"] = json.loads(info.json)
@@ -34,3 +35,22 @@ def proyectos(request, slug=None):
     data["proyectos"] = proyectos
 
     return render(request, "proyectos.html", data)
+
+def get_ajax_data(request, slug=None):
+    data = {}
+
+    info = Proyecto.objects.filter(publicado=True, slug=slug).first()
+
+    if not info:
+        return JsonResponse({"status": "bad"})
+
+    imagenes = info.proyectoimagenarchivo_set.all()
+    info = serializers.serialize('json', [info])
+
+    info = json.loads(info)
+
+    img = []
+    for imagen in imagenes:
+        img.append(imagen.imagen.url)
+
+    return JsonResponse({"data":info[0]["fields"], "imagenes":img, "status":"ok"})

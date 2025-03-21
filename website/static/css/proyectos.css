@@ -69,6 +69,11 @@ proyectos-page content{
     margin-top: 100px;
     margin-left: 0;
     margin-bottom: 100px;
+    transition: 0.3s;
+}
+.content-closed{
+    opacity: 0;
+    transform: scale(90%);
 }
 .opcionSelected{
     background-color: var(--mainColor);
@@ -86,7 +91,11 @@ proyectos-page content{
     transition: 0.3s;
     padding: 0 5px;
 }
+.tagsecondary{
+    opacity: 0.7 !important;
+}
 .tagselected{
+    opacity: 1 !important;
     padding-right: 0px !important;
 }
 .tagselected:hover{
@@ -118,8 +127,15 @@ content_mini{
     height: 300px;
     /*margin-left: 2%;*/
     margin: 10px;
-    
-    
+    opacity: 1;
+    transition: 0.3s;
+}
+.hide_content_mini{
+    opacity: 0;
+    margin: 0px;
+    /*transform: scale(90%);*/
+    flex-grow: 0.00001;
+    min-width: unset !important;
 }
 content_mini bg{
     width: 100%;
