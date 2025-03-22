@@ -30,6 +30,7 @@ window.addEventListener("load", (event) => {
     }*/
     textFitDo()
 });
+
 core.buildContent=function (data){
     core.currentId++;
     let ficha = ""
@@ -91,7 +92,9 @@ core.buildContent=function (data){
     }
     $('proyectos-page').append('' +
         '<content id="holder'+core.currentId+'" class="content-closed" style="display: none;">'+
-        '<content-navbar><span class="backButtonTest">'+core.labels.back+'</span><span>'+core.labels.next+'</span></content-navbar>'+
+        '<content-navbar><span href="#" onclick="clickOnBack();return false;">'+
+        core.labels.back+'</span><span href="#" onclick="clickOnNext();return false;">'
+        +core.labels.next+'</span></content-navbar>'+
         '<linea-larga></linea-larga>'+
         '<content-detalle>'+
         '<titulo><span>'+data.data.titulo+'</span></titulo>'+
@@ -107,7 +110,9 @@ core.buildContent=function (data){
         '<texto-largo>'+data.data.texto+'</texto-largo>'+
         '</content-detalle>'+
         '<linea-larga></linea-larga>'+
-        '<content-navbar><span class="backButtonTest">'+core.labels.back+'</span><span>'+core.labels.next+'</span></content-navbar>'+
+        '<content-navbar><span href="#" onclick="clickOnBack();return false;">'+
+        core.labels.back+'</span><span href="#" onclick="clickOnNext();return false;">'
+        +core.labels.next+'</span></content-navbar>'+
         '<space></space>'+
         '<space></space>'+
         '</content>'+
