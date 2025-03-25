@@ -29,6 +29,7 @@ window.addEventListener("load", (event) => {
         globalOnInitRun[i]();
     }*/
     textFitDo()
+    checkOnLoad();
 });
 
 core.buildContent=function (data){

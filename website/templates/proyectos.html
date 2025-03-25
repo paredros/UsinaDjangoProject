@@ -32,6 +32,7 @@
 <body>
     <script>
         core={};
+        core.stack=[]
         core.currentId=1;
         core.labels={
             "back":"{{ base.back }}",
@@ -62,6 +63,7 @@
             }
             processFilter()
             drawTags()
+            pushState("")
         }
         proy = {}
         proyList = []
@@ -182,14 +184,8 @@
 <script src="{% static 'js/textFit.js' %}" ></script>
 <script src="{% static 'js/proyectos.js' %}" type="module"></script>
 <script>
-    /*function textFitDo(){
-        textFit( $("figcaption h1"),{multiLine:true,detectMultiLine:true,
-         widthOnly:false,reProcess:true, alignVertWithFlexbox:false,alignVert:false});
 
-    }
-    textFitDo();*/
-
-    function OpenProyect(slug){
+    /*function OpenProyect(slug){
         core.selected=proy[slug]
         $("#holder1").addClass("content-closed")
         setTimeout(OpenProyect2,300)
@@ -203,12 +199,57 @@
         .then(response => response.json())
         .then(data => {
           //console.log(data.imagenes);
+
             if(data["status"] == "ok"){
                 //console.log(data);
                 core.buildContent(data);
+                pushState(slug);
             }
 
         });
+    }
+    function OpenNav(slug){
+        core.selected=proy[slug]
+        $("#holder"+core.currentId).addClass("content-closed")
+
+        fetch("/get_ajax_data/"+slug, {
+          method: "GET",
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          //console.log(data.imagenes);
+
+            if(data["status"] == "ok"){
+                //console.log(data);
+                core.buildContent(data);
+                //pushState(slug);
+                setTimeout(OpenNext2,300)
+            }
+
+        });
+    }
+    function getPath(){
+        let np = window.location.pathname.split("/");
+        np.pop()
+        return np.join("/")
+    }
+    function pushState(slug){
+        core.stack.push(proy[slug])
+        if (history.pushState) {
+
+            const path = getPath();
+            var newurl = window.location.protocol + "//" + window.location.host + path +"/" + slug;
+            //var newurl = window.location.protocol + "//" + window.location.host + slug;
+            window.history.pushState({path:slug,index:core.currentId},'',newurl);
+        }
+    }
+    function popState(slug){
+        if(history.pushState){
+            window.history.back();
+        }
     }
     function OpenProyect2(){
         $("#holder1").hide()
@@ -216,14 +257,7 @@
         $("#holder2").removeClass("content-closed")
     }
 
-    /*$("#clickTest").on("click",function(){
-        $("#holder1").addClass("invisible_real")
-        $("#holder2").removeClass("invisible_real")
-    })
-    $(".backButtonTest").on("click",function(){
-        $("#holder1").removeClass("invisible_real")
-        $("#holder2").addClass("invisible_real")
-    })*/
+
     function closeAll(){
          $("#holder"+core.currentId).addClass("content-closed")
         $("#holder1").show()
@@ -234,14 +268,60 @@
             }
             core.currentId=1;
         },300)
+        const path = getPath();
+        var newurl = window.location.protocol + "//" + window.location.host + path +"/";
+        //var newurl = window.location.protocol + "//" + window.location.host + slug;
+        window.history.pushState({path:""},'',newurl);
+    }
+    window.onpopstate = function(event) {
+
+        if(!event.state) {
+            closeAll();
+        }else{
+
+            alert(event.state.path + " " + event.state.index)
+            if(event.state.path==""){
+                closeAll();
+            }else if(event.state.index > core.currentId){
+                OpenNav(event.state.path)
+            }else if(event.state.index < core.currentId){
+                //jumpBack(event.state.path, event.state.index);
+                OpenNav(event.state.path)
+            }
+        }
+
     }
     function clickOnBack(){
+        popState()
+    }
+    function jumpBack(slug, index){
+        $("#holder"+core.currentId).addClass("content-closed")
+        const toerase=$("#holder"+core.currentId)
+        setTimeout(()=>{
+            toerase.remove()
+        },300)
+        for(var e=core.currentId;e>index;e--){
+            $("#holder"+e).remove()
+        }
+        core.currentId=index;
+        if(core.currentId>1) {
+            core.selected = core.stack[core.currentId - 2]
+            core.stack.pop()
+        }
+        $("#holder"+core.currentId).show()
+        $("#holder"+core.currentId).removeClass("content-closed")
+    }
+    function doOnBack(){
         $("#holder"+core.currentId).addClass("content-closed")
         const toerase=$("#holder"+core.currentId)
         setTimeout(()=>{
             toerase.remove()
         },300)
         core.currentId--
+        core.stack.pop()
+        if(core.currentId>1) {
+            core.selected = core.stack[core.currentId - 2]
+        }
         $("#holder"+core.currentId).show()
         $("#holder"+core.currentId).removeClass("content-closed")
 
@@ -253,7 +333,7 @@
             if(r!=false){
                 core.selected=r;
                 $("#holder"+core.currentId).addClass("content-closed")
-                setTimeout(OpenNext2,300)
+
 
                 fetch("/get_ajax_data/"+r["slug"], {
                   method: "GET",
@@ -267,6 +347,8 @@
                     if(data["status"] == "ok"){
                         //console.log(data);
                         core.buildContent(data);
+                        pushState(r["slug"])
+                        setTimeout(OpenNext2,300)
                     }
 
                 });
@@ -312,6 +394,111 @@
                 return proyList[ni]
             }
         }
+    }*/
+    function pushState(slug){
+        //core.stack.push(proy[slug])
+        if (history.pushState) {
+
+            const path = getPath();
+            const tags = urlTags();
+            var newurl = window.location.protocol + "//" + window.location.host + path +"/" + slug+tags;
+            //var newurl = window.location.protocol + "//" + window.location.host + slug;
+            window.history.pushState({path:slug,index:core.currentId, tags:tags},'',newurl);
+
+        }
+    }
+    function urlTags(){
+        let r="";
+        if(filterList.length>0){
+            r+="?tags=";
+            for(var n=0;n<filterList.length;n++) {
+                r+=filterList[n];
+                if(n<filterList.length-1){
+                    r+=","
+                }
+            }
+        }
+        return r;
+    }
+    function getPath(){
+        let np = window.location.pathname.split("/");
+        np.pop()
+        return np.join("/")
+    }
+    function loadUrlTags(){
+        let nt=window.location.toString().split("?");
+
+        if(nt.length>0){
+            let nt2=nt[1].split("=");
+            let tt=nt2[1].split(",");
+            for(let i=0;i<tt.length;i++){
+                //alert(tt[i]);
+                for(let j=0;j<tagsList.length;j++){
+                    if(tagsList[j]["slug"].toLowerCase()==tt[i].toLowerCase()){
+                        filterList.push(tagsList[j]["slug"]);
+                        tags[tagsList[j]["slug"]]["status"]=2;
+                    }
+                }
+            }
+
+        }
+    }
+    function checkOnLoad(){
+        loadUrlTags();
+        if(filterList.length>0) {
+            processFilter()
+            drawTags()
+        }
+        let np = window.location.pathname.split("/");
+
+    }
+    function processUrlTags(list){
+        list = list.split("=");
+        if(list.length>1){
+            list = list[1].split(",");
+            for(let j=0;j<list.length;j++){
+                alert(list[j])
+                filterList.push(list[j])
+                tags[list[j]]["status"]=2;
+            }
+        }
+    }
+    window.onpopstate = function(event) {
+
+        if(!event.state) {
+            //closeAll();
+            for(let i=0;i<filterList.length;i++){
+                tags[filterList[i]]["status"]=1;
+            }
+            filterList=[]
+            loadUrlTags()
+            drawTags()
+        }else{
+
+            //alert(event.state.path + " " + event.state.index)
+            for(let i=0;i<filterList.length;i++){
+                tags[filterList[i]]["status"]=1;
+            }
+            filterList=[]
+            if(event.state.tags.length>0){
+
+                processUrlTags(event.state.tags);
+            }
+            drawTags();
+            if(event.state.path==""){
+                if(core.currentId>1) {
+                    ///closeAll();
+                }
+                processFilter()
+            }else if(event.state.index > core.currentId){
+                OpenNav(event.state.path)
+            }else if(event.state.index < core.currentId){
+                //jumpBack(event.state.path, event.state.index);
+                OpenNav(event.state.path)
+            }
+
+        }
+
     }
 </script>
 </body>
