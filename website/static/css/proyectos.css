@@ -1,6 +1,9 @@
 proyectos-page{
 
 }
+.menu-over holder{
+    background-color: #fff !important;
+}
 proyectos-page h1{
     font-size: 5rem;
     line-height: 5rem;

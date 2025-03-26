@@ -307,3 +307,14 @@ function init() {
     })
     //console.log("TERMINO")
 }
+
+$(document).keydown(function(e){
+    e.preventDefault();
+    let currentPos = $(document).scrollTop()
+    if(e.keyCode === 38){
+        gsap.to(window, { duration: 1, scrollTo: currentPos-($(window).height()/2) });
+    } else if (e.keyCode === 40){
+        gsap.to(window, { duration: 1, scrollTo: currentPos+($(window).height()/2) });
+    }
+
+});

@@ -31,6 +31,7 @@
 </head>
 <body>
     <script>
+        globalOnPreInitRun=[]
         core={};
         core.stack=[]
         core.currentId=1;
@@ -180,187 +181,12 @@
 </section-large>
 
 {% include "bloques/footerblue.html" %}
-
+{% include "bloques/hud2.html" %}
+{% include "bloques/menuover.html" with menuover=menuover%}
 <script src="{% static 'js/textFit.js' %}" ></script>
 <script src="{% static 'js/proyectos.js' %}" type="module"></script>
 <script>
 
-    /*function OpenProyect(slug){
-        core.selected=proy[slug]
-        $("#holder1").addClass("content-closed")
-        setTimeout(OpenProyect2,300)
-
-        fetch("/get_ajax_data/"+slug, {
-          method: "GET",
-          headers: {
-            "X-Requested-With": "XMLHttpRequest",
-          }
-        })
-        .then(response => response.json())
-        .then(data => {
-          //console.log(data.imagenes);
-
-            if(data["status"] == "ok"){
-                //console.log(data);
-                core.buildContent(data);
-                pushState(slug);
-            }
-
-        });
-    }
-    function OpenNav(slug){
-        core.selected=proy[slug]
-        $("#holder"+core.currentId).addClass("content-closed")
-
-        fetch("/get_ajax_data/"+slug, {
-          method: "GET",
-          headers: {
-            "X-Requested-With": "XMLHttpRequest",
-          }
-        })
-        .then(response => response.json())
-        .then(data => {
-          //console.log(data.imagenes);
-
-            if(data["status"] == "ok"){
-                //console.log(data);
-                core.buildContent(data);
-                //pushState(slug);
-                setTimeout(OpenNext2,300)
-            }
-
-        });
-    }
-    function getPath(){
-        let np = window.location.pathname.split("/");
-        np.pop()
-        return np.join("/")
-    }
-    function pushState(slug){
-        core.stack.push(proy[slug])
-        if (history.pushState) {
-
-            const path = getPath();
-            var newurl = window.location.protocol + "//" + window.location.host + path +"/" + slug;
-            //var newurl = window.location.protocol + "//" + window.location.host + slug;
-            window.history.pushState({path:slug,index:core.currentId},'',newurl);
-        }
-    }
-    function popState(slug){
-        if(history.pushState){
-            window.history.back();
-        }
-    }
-    function OpenProyect2(){
-        $("#holder1").hide()
-        $("#holder2").show()
-        $("#holder2").removeClass("content-closed")
-    }
-
-
-    function closeAll(){
-         $("#holder"+core.currentId).addClass("content-closed")
-        $("#holder1").show()
-         $("#holder1").removeClass("content-closed")
-        setTimeout(()=>{
-            for(var i=2;i<=core.currentId;i++){
-                $("#holder"+i).remove()
-            }
-            core.currentId=1;
-        },300)
-        const path = getPath();
-        var newurl = window.location.protocol + "//" + window.location.host + path +"/";
-        //var newurl = window.location.protocol + "//" + window.location.host + slug;
-        window.history.pushState({path:""},'',newurl);
-    }
-    window.onpopstate = function(event) {
-
-        if(!event.state) {
-            closeAll();
-        }else{
-
-            alert(event.state.path + " " + event.state.index)
-            if(event.state.path==""){
-                closeAll();
-            }else if(event.state.index > core.currentId){
-                OpenNav(event.state.path)
-            }else if(event.state.index < core.currentId){
-                //jumpBack(event.state.path, event.state.index);
-                OpenNav(event.state.path)
-            }
-        }
-
-    }
-    function clickOnBack(){
-        popState()
-    }
-    function jumpBack(slug, index){
-        $("#holder"+core.currentId).addClass("content-closed")
-        const toerase=$("#holder"+core.currentId)
-        setTimeout(()=>{
-            toerase.remove()
-        },300)
-        for(var e=core.currentId;e>index;e--){
-            $("#holder"+e).remove()
-        }
-        core.currentId=index;
-        if(core.currentId>1) {
-            core.selected = core.stack[core.currentId - 2]
-            core.stack.pop()
-        }
-        $("#holder"+core.currentId).show()
-        $("#holder"+core.currentId).removeClass("content-closed")
-    }
-    function doOnBack(){
-        $("#holder"+core.currentId).addClass("content-closed")
-        const toerase=$("#holder"+core.currentId)
-        setTimeout(()=>{
-            toerase.remove()
-        },300)
-        core.currentId--
-        core.stack.pop()
-        if(core.currentId>1) {
-            core.selected = core.stack[core.currentId - 2]
-        }
-        $("#holder"+core.currentId).show()
-        $("#holder"+core.currentId).removeClass("content-closed")
-
-    }
-    function clickOnNext(){
-        let index = proyList.indexOf(core.selected)
-        if(index!=-1){
-            const r = findNext(index)
-            if(r!=false){
-                core.selected=r;
-                $("#holder"+core.currentId).addClass("content-closed")
-
-
-                fetch("/get_ajax_data/"+r["slug"], {
-                  method: "GET",
-                  headers: {
-                    "X-Requested-With": "XMLHttpRequest",
-                  }
-                })
-                .then(response => response.json())
-                .then(data => {
-                  //console.log(data.imagenes);
-                    if(data["status"] == "ok"){
-                        //console.log(data);
-                        core.buildContent(data);
-                        pushState(r["slug"])
-                        setTimeout(OpenNext2,300)
-                    }
-
-                });
-            }
-        }
-    }
-    function OpenNext2(){
-        const prev = core.currentId-1;
-        $("#holder"+prev).hide()
-        $("#holder"+core.currentId).show()
-        $("#holder"+core.currentId).removeClass("content-closed")
-    }*/
     function findNext(index){
         let e=true
         let ni=index+1;

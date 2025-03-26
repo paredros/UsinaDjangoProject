@@ -1,0 +1,25 @@
+{% load static %}
+
+<section class="HUD">
+    <div id="LogoUMini" class="hideAnimOutTop"><img src ="{% static 'svgs/logos/LogoUBlueDark.svg' %}" alt="U"/></div>
+
+    </div>
+  </section>
+<script>
+
+    globalOnPreInitRun.push(()=>{
+        hudAppShow()
+    })
+
+    const logoMini=$("#LogoUMini");
+
+    function hudAppHide(){
+        logoMini.addClass("hideAnimOutTop");
+    }
+    function hudAppShow(){
+        logoMini.removeClass("hideAnimOutTop");
+    }
+    $("#LogoUMini").on("click", function(){
+        OpenMenuOver();
+    })
+</script>

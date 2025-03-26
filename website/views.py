@@ -29,12 +29,35 @@ def proyectos(request, slug=None):
     data = {}
     info = Bloques.objects.all().filter(titulo="proyectoshome", lenguaje="esp").first()
     data["base"] = json.loads(info.json)
-    tags = Tags.objects.all().order_by("tag")
+    #tags = Tags.objects.all().order_by("tag")
+    tags = Tags.objects.filter(proyecto__es_servicio=False).distinct().order_by("tag")
     data["tags"] = tags
-    proyectos = Proyecto.objects.filter(publicado=True).all()
+    proyectos = Proyecto.objects.filter(publicado=True, es_servicio=False).all()
     data["proyectos"] = proyectos
 
+    info = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
+
+    data["menuover"] = json.loads(info.json)
+
     return render(request, "proyectos.html", data)
+
+
+def servicios(request, slug=None):
+    data = {}
+    info = Bloques.objects.all().filter(titulo="servicioshome", lenguaje="esp").first()
+    data["base"] = json.loads(info.json)
+    #tags = Tags.objects.all().order_by("tag")
+    tags = Tags.objects.filter(proyecto__es_servicio=True).distinct().order_by("tag")
+    data["tags"] = tags
+    proyectos = Proyecto.objects.filter(publicado=True, es_servicio=True).all()
+    data["proyectos"] = proyectos
+
+    info = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
+
+    data["menuover"] = json.loads(info.json)
+
+    return render(request, "proyectos.html", data)
+
 
 def get_ajax_data(request, slug=None):
     data = {}

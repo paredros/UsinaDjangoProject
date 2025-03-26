@@ -25,8 +25,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('proyectos/<slug:slug>', views.proyectos),
+    path('servicios/<slug:slug>', views.servicios),
+    path('soluciones/<slug:slug>', views.servicios),
     path('get_ajax_data/<slug:slug>', views.get_ajax_data),
     path('proyectos/', views.proyectos),
+    path('servicios/', views.servicios),
+    path('soluciones/', views.servicios),
 ]
 urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)

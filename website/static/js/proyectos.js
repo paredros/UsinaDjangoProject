@@ -20,9 +20,9 @@ function textFitDoCorrection(){
          widthOnly:false,reProcess:true, alignVertWithFlexbox:false,alignVert:false});
 }
 window.addEventListener("load", (event) => {
-    /*for(let i=0;i<globalOnPreInitRun.length;i++){
+    for(let i=0;i<globalOnPreInitRun.length;i++){
         globalOnPreInitRun[i]();
-    }*/
+    }
     //init();
     resizeController.start(onResize);
     /*for(let i=0;i<globalOnInitRun.length;i++){
