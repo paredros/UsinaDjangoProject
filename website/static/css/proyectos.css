@@ -35,6 +35,12 @@ proyectos-page figcaption h1{
     margin: 0;
     padding: 0;
     color: var(--thirdColor);
+    transition: 0.3s;
+}
+proyectos-page figcaption h1:hover{
+    cursor: pointer;
+    background-color: var(--fourthColor);
+    color: var(--secondColor);
 }
 proyectos-page figcaption h1 span{
     margin-top: 30px;

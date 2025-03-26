@@ -124,7 +124,7 @@
         <!--h1>DEL SUEÑO AL PROYECTO Y DEL PROYECTO A LA REALIDAD</h1-->
         <h1>{{ base.copete | safe }}</h1>
         <!--linea-larga></linea-larga-->
-        <figcaption><h1>{{ base.titulo | safe }}</h1></figcaption>
+        <figcaption><h1 href="#" onclick="clearAll();return false;">{{ base.titulo | safe }}</h1></figcaption>
         <p></p>
         <linea-larga></linea-larga>
         <tags>
@@ -360,7 +360,7 @@
         $("#holder"+prev).hide()
         $("#holder"+core.currentId).show()
         $("#holder"+core.currentId).removeClass("content-closed")
-    }
+    }*/
     function findNext(index){
         let e=true
         let ni=index+1;
@@ -394,7 +394,7 @@
                 return proyList[ni]
             }
         }
-    }*/
+    }
     function pushState(slug){
         //core.stack.push(proy[slug])
         if (history.pushState) {
@@ -428,7 +428,7 @@
     function loadUrlTags(){
         let nt=window.location.toString().split("?");
 
-        if(nt.length>0){
+        if(nt.length>1){
             let nt2=nt[1].split("=");
             let tt=nt2[1].split(",");
             for(let i=0;i<tt.length;i++){
@@ -443,29 +443,64 @@
 
         }
     }
+    function loadUrlSlug(){
+        let np = window.location.pathname.split("/");
+        return np[np.length-1]
+    }
     function checkOnLoad(){
         loadUrlTags();
         if(filterList.length>0) {
             processFilter()
             drawTags()
         }
-        let np = window.location.pathname.split("/");
-
+        const slug = loadUrlSlug()
+        if(slug!="" && slug!=undefined) {
+            OpenNav(slug, false);
+        }
     }
     function processUrlTags(list){
         list = list.split("=");
         if(list.length>1){
             list = list[1].split(",");
             for(let j=0;j<list.length;j++){
-                alert(list[j])
+
                 filterList.push(list[j])
                 tags[list[j]]["status"]=2;
             }
         }
     }
+    function closeAll(){
+
+        if(core.currentId==1){
+
+            return;
+        }
+        $("#holder"+core.currentId).addClass("content-closed")
+        $("#holder1").show()
+        $("#holder1").removeClass("content-closed")
+        setTimeout(()=>{
+            for(var i=2;i<=core.currentId;i++){
+                $("#holder"+i).remove()
+            }
+            core.currentId=1;
+        },300)
+    }
+    function clearAll(){
+
+        for(let i=0;i<filterList.length;i++){
+            tags[filterList[i]]["status"]=1;
+        }
+        filterList=[]
+
+        drawTags()
+        closeAll()
+        processFilter()
+        pushState("")
+    }
     window.onpopstate = function(event) {
 
         if(!event.state) {
+
             //closeAll();
             for(let i=0;i<filterList.length;i++){
                 tags[filterList[i]]["status"]=1;
@@ -473,6 +508,15 @@
             filterList=[]
             loadUrlTags()
             drawTags()
+            const slug = loadUrlSlug()
+            if(slug!="" && slug!=undefined) {
+
+                OpenNav(slug, false);
+            }else{
+
+                closeAll()
+                processFilter()
+            }
         }else{
 
             //alert(event.state.path + " " + event.state.index)
@@ -487,18 +531,71 @@
             drawTags();
             if(event.state.path==""){
                 if(core.currentId>1) {
-                    ///closeAll();
+                    closeAll();
                 }
                 processFilter()
             }else if(event.state.index > core.currentId){
-                OpenNav(event.state.path)
+                OpenNav(event.state.path, false)
             }else if(event.state.index < core.currentId){
                 //jumpBack(event.state.path, event.state.index);
-                OpenNav(event.state.path)
+                OpenNav(event.state.path, false)
             }
 
         }
 
+    }
+    function OpenProyect(slug){
+        OpenNav(slug);
+    }
+    function clickOnBack(){
+        if(history.pushState){
+            window.history.back();
+        }
+    }
+    function OpenNav(slug, stack=true){
+        core.selected=proy[slug]
+        $("#holder"+core.currentId).addClass("content-closed")
+
+        fetch("/get_ajax_data/"+slug, {
+          method: "GET",
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          //console.log(data.imagenes);
+
+            if(data["status"] == "ok"){
+                //console.log(data);
+                core.buildContent(data);
+                if(stack) {
+                    pushState(slug);
+                }
+                setTimeout(OpenNext2,300)
+            }
+
+        });
+    }
+    function OpenNext2(){
+        const prev = core.currentId-1;
+        if(prev>1) {
+            $("#holder" + prev).remove()
+        }else{
+            $("#holder" + prev).hide()
+        }
+        $("#holder"+core.currentId).show()
+        $("#holder"+core.currentId).removeClass("content-closed")
+    }
+    function clickOnNext(){
+        let index = proyList.indexOf(core.selected)
+        if(index!=-1){
+            const r = findNext(index)
+            if(r!=false){
+                OpenNav(r["slug"])
+
+            }
+        }
     }
 </script>
 </body>

@@ -70,6 +70,7 @@ core.buildContent=function (data){
 
     for(let i=0; i<proy[data.data.slug].tags.length; i++){
         let t= proy[data.data.slug].tags[i];
+        tags_t+="<a href='#' onclick='clickOnTag(`"+t+"`);return false;'>"
         if(tags[t]["status"]==2){
             tags_t += "<span class='tagselected'>"+t+"</span>"
         }else{
@@ -79,7 +80,7 @@ core.buildContent=function (data){
                 tags_t += "<span>"+t+"</span>"
             }
         }
-
+        tags_t+="</a>"
     }
     tags_t+="</tags>"
     let imagenes=""
