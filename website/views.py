@@ -58,6 +58,9 @@ def servicios(request, slug=None):
 
     return render(request, "proyectos.html", data)
 
+def nosotros(request):
+
+    return render(request, "nosotros.html")
 
 def get_ajax_data(request, slug=None):
     data = {}

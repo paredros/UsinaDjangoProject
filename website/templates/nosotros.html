@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+
+<!--html lang="es" class="prevent-scroll-y"-->
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USINA::NOSOTROS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/"
+          }
+        }
+      </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"-->
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/preload.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mediavertical.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mediahorizontalextra.css' %}">
+    <link rel="stylesheet" href="{% static 'css/generic.css' %}">
+
+
+</head>
+
+<body style="background-color: transparent ">
+<canvas id="bg" class="set-background-gradient-1" style="z-index: -1"></canvas>
+<section-large>
+    <generic-page>
+        <h1>Aunque seamos pocos, somos muchos.</h1>
+        <figcaption><h1 href="#" onclick="clearAll();return false;">NOSOTROS</h1></figcaption>
+        <p></p>
+        <linea-larga></linea-larga>
+        <h2><b>Usina</b> es un espacio de convergencia entre <b>arte</b>, <b>tecnología</b>, <b>ciencia</b>, <b>comunicacion</b> y <b>cultura</b> donde apostamos por el potencial de los <b>proyectos culturales</b> para mejorar una <b>comunidad</b>.
+        </h2>
+        <div class="flex-horizontal set-backcolor-1">
+            <div class="flex-item set-color-3">
+                <p>Entendemos que cada propuesta cobra sentido a través de su apropiación por parte del público.</p>
+            </div>
+            <div class="flex-item set-color-3">
+                <h3> Nuestra motivación es la energía devuelta por la comunidad. </h3>
+            </div>
+        </div>
+
+        <h2>
+            nuestra busqueda esta en tratar de hacer llegar ciertos contenidos, cierta informacion a la mayor cantidad de gente posible, por eso nos gusta imaginar la ciudad como escenario ideal.
+        </h2>
+        <div class="flex-horizontal set-backcolor-2">
+            <div class="flex-item set-color-3">
+                <h3>Somos interpretaciones artísticas del conocimiento.</h3>
+            </div>
+            <div class="flex-item set-color-3">
+                <p>Vemos la información como una potencial manifestación estética que puede desde embellecer lo cotidiano hasta diseñar futuros mejores.</p>
+            </div>
+
+        </div>
+        <!--div class="flex-horizontal set-backcolor-2">
+
+            <div class="flex-item set-color-3" style="padding-top: 50px">
+                <h3>Es en la dialéctica ciencia-arte que encontramos un gran campo de acción.</h3>
+            </div>
+
+        </div-->
+        <h3>
+            Es en la dialéctica ciencia-arte que encontramos un gran campo de acción.
+        </h3>
+        <div class="flex-horizontal set-backcolor-2">
+            <div class="flex-item set-color-3">
+                <h3>Laboratorio permanente</h3>
+            </div>
+            <div class="flex-item set-color-3">
+                <p>pensadores de proyectos, catalizadores de ideas, estamos en estado de permante creacion y producicon.</p>
+            </div>
+
+        </div>
+        <space></space>
+    </generic-page>
+
+</section-large>
+</body>
+</html>

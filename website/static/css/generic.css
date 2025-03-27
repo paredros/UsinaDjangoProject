@@ -1,0 +1,99 @@
+generic-page h1{
+    font-size: 5rem;
+    line-height: 5rem;
+    font-weight: 100;
+    padding-top: 100px;
+    text-transform:uppercase;
+}
+generic-page h2{
+    font-size: 3rem;
+    line-height: 3rem;
+    font-weight: 100;
+    padding-top: 100px;
+    text-transform:uppercase;
+    opacity: 0.8;
+}
+
+generic-page h2 b{
+    font-weight: 500;
+    opacity: 1;
+}
+generic-page h3{
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    font-weight: 100;
+    text-transform:uppercase;
+    opacity: 0.8;
+}
+generic-page linea-larga{
+    display: block;
+    width: 100%;
+    line-height: 0;
+    margin: 0;
+    background-color: var(--secondColor);
+    height: 3px;
+}
+generic-page space{
+    display: block;
+    height: 50px;
+}
+generic-page tags span:hover{
+    padding: 5px !important;
+}
+generic-page figcaption{
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+generic-page figcaption h1{
+    background-color: var(--secondColor);
+    width: 100%;
+    font-size: 4rem;
+    margin: 0;
+    padding: 0;
+    color: var(--thirdColor);
+    transition: 0.3s;
+}
+
+generic-page figcaption h1 span{
+    margin-top: 30px;
+    margin-bottom: 0px;
+    padding: 0;
+}
+.flex-horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.flex-item{
+    flex: auto;
+    padding: 10px;
+}
+.flex-item p{
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    font-weight: 300;
+    margin: 0;
+}
+.flex-item h3{
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    font-weight: 100;
+    text-transform:uppercase;
+    margin: 0;
+}
+.set-background-gradient-1{
+    background: linear-gradient(27deg, var(--fifthColor) 60%, var(--fourthColor) 100%);
+}
+
+@media (max-aspect-ratio: 6/7) {
+    .flex-horizontal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .flex-item{
+        padding: 30px 10px;
+    }
+}
