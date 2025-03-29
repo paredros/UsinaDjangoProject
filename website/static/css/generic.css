@@ -86,7 +86,99 @@ generic-page figcaption h1 span{
 .set-background-gradient-1{
     background: linear-gradient(27deg, var(--fifthColor) 60%, var(--fourthColor) 100%);
 }
+alianzas{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+alianzas alianza{
+    display: flex;
+    flex-direction: column;
+}
+alianzas alianza nombre{
+    font-size: 2rem;
+    padding: 5px;
+    background-color: var(--mainColor);
+    color: var(--thirdColor);
+}
+alianzas alianza direccion{
+    background-color: var(--secondColor);
+    color: var(--thirdColor);
+    margin-left: 1rem !important;
+    font-size: 1rem !important;
+    padding: 3px 1rem;
 
+    overflow-wrap: break-word;
+    /*text-align: right;*/
+    transition: 0.3s;
+}
+alianzas alianza direccion:hover{
+    cursor: pointer;
+    background-color: var(--fourthColor);
+    color: var(--secondColor);
+}
+personas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+personas persona{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    flex: 1 1;
+    width: 250px;
+    min-width: 250px;
+    max-width: 250px;
+    height: 400px;
+    opacity: 1;
+    transition: 0.3s;
+    align-items: center;
+    margin: 1rem 0;
+    justify-content: center;
+}
+persona foto{
+    width: 200px;
+    height: 200px;
+}
+persona foto img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+}
+persona nombre{
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    text-transform:uppercase;
+    text-align: center;
+}
+persona over{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 0%;
+    background-color: var(--secondColor);
+    overflow: hidden;
+    transition: 0.1s;
+    color: var(--thirdColor);
+    justify-items: end;
+    border-radius: 15px;
+}
+persona over p{
+    padding: 1rem;
+    bottom: 0px;
+    position: absolute;
+}
+persona:hover{
+    cursor: pointer;
+}
+persona:hover over{
+    height: 100% !important;
+}
 @media (max-aspect-ratio: 6/7) {
     .flex-horizontal {
         display: flex;
@@ -95,5 +187,21 @@ generic-page figcaption h1 span{
     }
     .flex-item{
         padding: 30px 10px;
+    }
+    generic-page h1{
+        font-size: 3rem;
+        line-height: 3rem;
+        overflow-wrap: break-word;
+    }
+    generic-page h2{
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+    }
+    generic-page h3{
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+    alianzas alianza direccion{
+        text-align: right;
     }
 }
