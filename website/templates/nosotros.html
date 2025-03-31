@@ -32,23 +32,31 @@
 </head>
 
 <body style="background-color: transparent ">
-<canvas id="bg" class="set-background-gradient-1" style="z-index: -1"></canvas>
-<section-large>
-    <generic-page>
+<script>
+    globalOnPreInitRun=[]
+</script>
+<canvas id="bg" class="set-background-gradient-2" style="z-index: -1"></canvas>
+<section-large id="nosotros">
+    <generic-page id="test">
         <h1>Aunque seamos pocos, somos muchos.</h1>
         <figcaption><h1>NOSOTROS</h1></figcaption>
         <p></p>
         <linea-larga></linea-larga>
         <h2><b>Usina</b> es un espacio de convergencia entre <b>arte</b>, <b>tecnología</b>, <b>ciencia</b>, <b>comunicacion</b> y <b>cultura</b> donde apostamos por el potencial de los <b>proyectos culturales</b> para mejorar una <b>comunidad</b>.
         </h2>
-        <div class="flex-horizontal set-backcolor-1">
+        <!--div class="flex-horizontal set-backcolor-1">
             <div class="flex-item set-color-3">
                 <p>Entendemos que cada propuesta cobra sentido a través de su apropiación por parte del público.</p>
             </div>
             <div class="flex-item set-color-3">
                 <h3> Nuestra motivación es la energía devuelta por la comunidad. </h3>
             </div>
-        </div>
+        </div-->
+        <frameimage>
+            <img src="{% static 'imgs/about/about1.jpeg' %}">
+            <text-top class="set-backcolor-1 anchor-left width-60">Entendemos que cada propuesta cobra sentido a través de su apropiación por parte del público.</text-top>
+            <text-bottom class="set-backcolor-1 anchor-left"><h3> Nuestra motivación es la energía devuelta por la comunidad. </h3></text-bottom>
+        </frameimage>
         <space></space>
         <h3>
             Desde 2010, desarrollamos proyectos
@@ -60,7 +68,7 @@ privado y el tercer sector en
         <h2>
             nuestra busqueda esta en tratar de hacer llegar ciertos contenidos, cierta informacion a la mayor cantidad de gente posible, <b>por eso nos gusta imaginar la ciudad como escenario ideal.</b>
         </h2>
-        <div class="flex-horizontal set-backcolor-2">
+        <!--div class="flex-horizontal set-backcolor-2">
             <div class="flex-item set-color-3">
                 <h3>Somos interpretaciones artísticas del conocimiento.</h3>
             </div>
@@ -68,7 +76,12 @@ privado y el tercer sector en
                 <p>Vemos la información como una potencial manifestación estética que puede desde embellecer lo cotidiano hasta diseñar futuros mejores.</p>
             </div>
 
-        </div>
+        </div-->
+        <frameimage>
+            <img src="{% static 'imgs/about/about2.jpeg' %}">
+            <text-top class="set-backcolor-2 anchor-left"><h3>Somos interpretaciones artísticas del conocimiento.</h3></text-top>
+            <text-bottom class="set-backcolor-2 anchor-right width-60">Vemos la información como una potencial manifestación estética que puede desde embellecer lo cotidiano hasta diseñar futuros mejores.</text-bottom>
+        </frameimage>
         <!--div class="flex-horizontal set-backcolor-2">
 
             <div class="flex-item set-color-3" style="padding-top: 50px">
@@ -79,7 +92,7 @@ privado y el tercer sector en
         <h1>
             Es en la dialéctica ciencia-arte que encontramos un gran campo de acción.
         </h1>
-        <div class="flex-horizontal set-backcolor-2">
+        <!--div class="flex-horizontal set-backcolor-2">
             <div class="flex-item set-color-3">
                 <h3>Un Laboratorio permanente</h3>
             </div>
@@ -87,9 +100,22 @@ privado y el tercer sector en
                 <p>Somos pensadores de proyectos, catalizadores de ideas, estamos en estado de permante creacion y producicon.</p>
             </div>
 
-        </div>
+        </div-->
+        <frameimage>
+            <img src="{% static 'imgs/about/about3.jpeg' %}">
+            <text-top class="set-backcolor-2 anchor-left width-60"><h3>Un Laboratorio permanente</h3></text-top>
+            <text-bottom class="set-backcolor-2 anchor-left">Somos pensadores de proyectos, catalizadores de ideas, estamos en estado de permante creacion y producicon.</text-bottom>
+        </frameimage>
         <space></space>
 
+    </generic-page>
+
+</section-large>
+<half-section></half-section>
+<section-large id="alianzas" class="set-backcolor-4" style="z-index: 1">
+
+    <generic-page>
+        <space></space>
         <h1>Soñadores, sí, pero también proactivos y resolutivos. Siempre encontramos la manera</h1>
         <space></space>
         <figcaption><h1>ALIANZAS</h1></figcaption>
@@ -113,7 +139,13 @@ privado y el tercer sector en
         <space></space>
         <space></space>
 
-        <h1>un equipo multidisciplinario de profesionales</h1>
+    </generic-page>
+</section-large>
+<half-section></half-section>
+<section-large id="personas" class="set-backcolor-3" style="z-index: 20">
+    <generic-page>
+        <space></space>
+        <h1>un equipo multi-disciplinario de profesionales</h1>
 
         <figcaption><h1>PERSONAS</h1></figcaption>
         <p></p>
@@ -181,5 +213,22 @@ marcas en espacio público.</p></over>
     </generic-page>
 
 </section-large>
+<half-section></half-section>
+<!--solapas>
+    <solapa>
+        <span class="rotate">NOSOTROS</span>
+    </solapa>
+    <solapa>
+        <span class="rotate">ALIANZAS</span>
+    </solapa>
+</solapas-->
+{% include "bloques/contactformsection.html" %}
+{% include "bloques/footerblue.html" %}
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollToPlugin.min.js"></script>
+    <script src="{% static 'js/textFit.js' %}"></script>
+    <script src="{% static 'js/nosotros.js' %}" type="module"></script>
 </body>
 </html>

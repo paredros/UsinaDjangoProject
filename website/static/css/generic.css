@@ -86,6 +86,9 @@ generic-page figcaption h1 span{
 .set-background-gradient-1{
     background: linear-gradient(27deg, var(--fifthColor) 60%, var(--fourthColor) 100%);
 }
+.set-background-gradient-2{
+    background: linear-gradient(77deg, #E8E5E0 30%, #d6f93d 100%);
+}
 alianzas{
     display: flex;
     flex-direction: column;
@@ -157,7 +160,7 @@ persona nombre{
 }
 persona over{
     position: absolute;
-    top: 0px;
+    top: 50%;
     left: 0px;
     width: 100%;
     height: 0%;
@@ -178,6 +181,67 @@ persona:hover{
 }
 persona:hover over{
     height: 100% !important;
+    top: 0px !important;
+}
+frameimage{
+    display: block;
+    width: 100%;
+    height: 100dvh;
+    position: relative;
+    overflow: hidden;
+}
+frameimage img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 7.7s;
+}
+frameimage img:hover{
+    transform: scale(1.2);
+}
+frameimage text-top{
+    position: absolute;
+
+    top: 0px;
+
+    color: var(--thirdColor);
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    padding: 1.5rem;
+    /*width: 60%;*/
+}
+frameimage text-bottom{
+    position: absolute;
+
+    bottom: 0px;
+
+    color: var(--thirdColor);
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    padding: 1.5rem;
+
+}
+frameimage h3{
+    margin: 0px !important;
+}
+.anchor-left{
+    left: 0;
+}
+.anchor-right{
+    right: 0;
+}
+.width-60{
+    width: 60%;
+}
+.rotate {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.footerfinalBlue{
+    z-index: 30;
+}
+.footerfinal{
+    z-index: 25;
 }
 @media (max-aspect-ratio: 6/7) {
     .flex-horizontal {
