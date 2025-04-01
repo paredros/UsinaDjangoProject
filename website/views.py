@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import json
 
-from website.models import Scrollytelling, Bloques, Tags, Proyecto
+from website.models import Scrollytelling, Bloques, Tags, Proyecto, Direcciones
 from website.preprocess import preprocess_general
 
 from django.core import serializers
@@ -59,8 +59,18 @@ def servicios(request, slug=None):
     return render(request, "proyectos.html", data)
 
 def nosotros(request):
+    data={}
+    menu = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
+    contact = Bloques.objects.all().filter(titulo="contactformdata", lenguaje="esp").first()
 
-    return render(request, "nosotros.html")
+    data["menuover"] = json.loads(menu.json)
+    data["contact"] = {}
+    data["contact"]["data"]={}
+    data["contact"]["data"]["info"]=json.loads(contact.json)
+    direcciones = Direcciones.objects.all().filter(publicado=True).order_by("pais")
+    data["contact"]["data"]["direcciones"] = direcciones
+
+    return render(request, "nosotros.html", data)
 
 def get_ajax_data(request, slug=None):
     data = {}

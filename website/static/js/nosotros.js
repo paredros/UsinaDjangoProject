@@ -53,6 +53,17 @@ function init(){
             end: 'bottom top',
         }
     })
+    gsap.fromTo("#personas",{
+        background: "linear-gradient(190deg, #E8E5E0 90%, #d6f93d 100%)"
+    },{
+        background: "linear-gradient(170deg, #E8E5E0 0%, #d6f93d 10%)",
+        scrollTrigger:{
+            trigger: '#personas',
+            start: 'top top',
+            scrub:1,
+            end: 'bottom top',
+        }
+    })
 
     ScrollTrigger.create({
         trigger: '#nosotros',

@@ -89,6 +89,9 @@ generic-page figcaption h1 span{
 .set-background-gradient-2{
     background: linear-gradient(77deg, #E8E5E0 30%, #d6f93d 100%);
 }
+.set-background-gradient-3{
+    background: linear-gradient(170deg, #E8E5E0 60%, #d6f93d 100%);
+}
 alianzas{
     display: flex;
     flex-direction: column;
