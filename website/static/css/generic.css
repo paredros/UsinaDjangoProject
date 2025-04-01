@@ -120,7 +120,7 @@ alianzas alianza direccion{
 }
 alianzas alianza direccion:hover{
     cursor: pointer;
-    background-color: var(--fourthColor);
+    background-color: var(--fifthColor);
     color: var(--secondColor);
 }
 personas{

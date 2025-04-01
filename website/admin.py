@@ -38,3 +38,13 @@ class BloquesAdmin(admin.ModelAdmin):
     class Meta:
         model = Bloques
 
+@admin.register(Alianza)
+class AlianzaAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Alianza
+
+@admin.register(Persona)
+class PersonaAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Persona
+

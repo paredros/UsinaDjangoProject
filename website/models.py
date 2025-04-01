@@ -22,6 +22,11 @@ def get_file_path_nota(instance, filename):
     filename = "%s.%s" % (instance.slug, ext)
     return os.path.join('images/notas', filename)
 
+def get_file_path_persona(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (uuid.uuid4(), ext)
+    return os.path.join('images/personas', filename)
+
 
 # Create your models here.
 
@@ -106,3 +111,20 @@ class Bloques(models.Model):
     lenguaje = models.CharField(max_length=30, choices=TYPE_LIST, default='esp')
     def __str__(self):
         return self.titulo
+
+class Alianza(models.Model):
+    nombre = models.CharField(max_length=255)
+    links = models.TextField(default="", blank=True, null=True)
+
+    def __str__(self):
+        return self.nombre
+
+class Persona(models.Model):
+    nombre = models.CharField(max_length=255)
+    posicion = models.CharField(max_length=255)
+    resume = models.TextField(default="",blank=True, null=True)
+    foto = models.ImageField(upload_to=get_file_path_persona)
+    orden_portada = models.IntegerField(default=-1)
+
+    def __str__(self):
+        return self.nombre

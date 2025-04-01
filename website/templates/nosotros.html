@@ -38,73 +38,35 @@
 <canvas id="bg" class="set-background-gradient-2" style="z-index: -1"></canvas>
 <section-large id="nosotros">
     <generic-page id="test">
-        <h1>Aunque seamos pocos, somos muchos.</h1>
-        <figcaption><h1>NOSOTROS</h1></figcaption>
+        <h1>{{ nosotrosdata.nosotros.b1 | safe }}</h1>
+        <figcaption><h1>{{ nosotrosdata.nosotros.fig | safe }}</h1></figcaption>
         <p></p>
         <linea-larga></linea-larga>
-        <h2><b>Usina</b> es un espacio de convergencia entre <b>arte</b>, <b>tecnología</b>, <b>ciencia</b>, <b>comunicacion</b> y <b>cultura</b> donde apostamos por el potencial de los <b>proyectos culturales</b> para mejorar una <b>comunidad</b>.
-        </h2>
-        <!--div class="flex-horizontal set-backcolor-1">
-            <div class="flex-item set-color-3">
-                <p>Entendemos que cada propuesta cobra sentido a través de su apropiación por parte del público.</p>
-            </div>
-            <div class="flex-item set-color-3">
-                <h3> Nuestra motivación es la energía devuelta por la comunidad. </h3>
-            </div>
-        </div-->
+        <h2>{{ nosotrosdata.nosotros.b2 | safe }}</h2>
+
         <frameimage>
-            <img src="{% static 'imgs/about/about1.jpeg' %}">
-            <text-top class="set-backcolor-1 anchor-left width-60">Entendemos que cada propuesta cobra sentido a través de su apropiación por parte del público.</text-top>
-            <text-bottom class="set-backcolor-1 anchor-left"><h3> Nuestra motivación es la energía devuelta por la comunidad. </h3></text-bottom>
+            <img src="{% static nosotrosdata.nosotros.frame1.image %}">
+            <text-top class="set-backcolor-1 anchor-left width-60">{{ nosotrosdata.nosotros.frame1.top | safe}}</text-top>
+            <text-bottom class="set-backcolor-1 anchor-left"><h3>{{ nosotrosdata.nosotros.frame1.bottom | safe }}</h3></text-bottom>
         </frameimage>
         <space></space>
         <h3>
-            Desde 2010, desarrollamos proyectos
-culturales articulando sector público,
-privado y el tercer sector en
- Argentina, Brasil, México y otros países
- de Latinoamérica.
+            {{ nosotrosdata.nosotros.b3 | safe }}
         </h3>
-        <h2>
-            nuestra busqueda esta en tratar de hacer llegar ciertos contenidos, cierta informacion a la mayor cantidad de gente posible, <b>por eso nos gusta imaginar la ciudad como escenario ideal.</b>
-        </h2>
-        <!--div class="flex-horizontal set-backcolor-2">
-            <div class="flex-item set-color-3">
-                <h3>Somos interpretaciones artísticas del conocimiento.</h3>
-            </div>
-            <div class="flex-item set-color-3">
-                <p>Vemos la información como una potencial manifestación estética que puede desde embellecer lo cotidiano hasta diseñar futuros mejores.</p>
-            </div>
+        <h2>{{ nosotrosdata.nosotros.b4 | safe }}</h2>
 
-        </div-->
         <frameimage>
-            <img src="{% static 'imgs/about/about2.jpeg' %}">
-            <text-top class="set-backcolor-2 anchor-left"><h3>Somos interpretaciones artísticas del conocimiento.</h3></text-top>
-            <text-bottom class="set-backcolor-2 anchor-right width-60">Vemos la información como una potencial manifestación estética que puede desde embellecer lo cotidiano hasta diseñar futuros mejores.</text-bottom>
+            <img src="{% static nosotrosdata.nosotros.frame2.image %}">
+            <text-top class="set-backcolor-2 anchor-left"><h3>{{ nosotrosdata.nosotros.frame2.top | safe }}</h3></text-top>
+            <text-bottom class="set-backcolor-2 anchor-right width-60">{{ nosotrosdata.nosotros.frame2.bottom | safe }}</text-bottom>
         </frameimage>
-        <!--div class="flex-horizontal set-backcolor-2">
 
-            <div class="flex-item set-color-3" style="padding-top: 50px">
-                <h3>Es en la dialéctica ciencia-arte que encontramos un gran campo de acción.</h3>
-            </div>
+        <h1>{{ nosotrosdata.nosotros.b5 | safe }}</h1>
 
-        </div-->
-        <h1>
-            Es en la dialéctica ciencia-arte que encontramos un gran campo de acción.
-        </h1>
-        <!--div class="flex-horizontal set-backcolor-2">
-            <div class="flex-item set-color-3">
-                <h3>Un Laboratorio permanente</h3>
-            </div>
-            <div class="flex-item set-color-3">
-                <p>Somos pensadores de proyectos, catalizadores de ideas, estamos en estado de permante creacion y producicon.</p>
-            </div>
-
-        </div-->
         <frameimage>
-            <img src="{% static 'imgs/about/about3.jpeg' %}">
-            <text-top class="set-backcolor-2 anchor-left width-60"><h3>Un Laboratorio permanente</h3></text-top>
-            <text-bottom class="set-backcolor-2 anchor-left">Somos pensadores de proyectos, catalizadores de ideas, estamos en estado de permante creacion y producicon.</text-bottom>
+            <img src="{% static nosotrosdata.nosotros.frame3.image %}">
+            <text-top class="set-backcolor-2 anchor-left width-60"><h3>{{ nosotrosdata.nosotros.frame3.top | safe }}</h3></text-top>
+            <text-bottom class="set-backcolor-2 anchor-left">{{ nosotrosdata.nosotros.frame3.bottom | safe }}</text-bottom>
         </frameimage>
         <space></space>
 
@@ -115,26 +77,25 @@ privado y el tercer sector en
 <section-large id="alianzas" class="set-backcolor-4" style="z-index: 1">
 
     <generic-page>
+
         <space></space>
-        <h1>Soñadores, sí, pero también proactivos y resolutivos. Siempre encontramos la manera</h1>
+        <h1>{{ nosotrosdata.alianzas.b1 | safe }}</h1>
         <space></space>
-        <figcaption><h1>ALIANZAS</h1></figcaption>
+        <figcaption><h1>{{ nosotrosdata.alianzas.fig | safe }}</h1></figcaption>
         <p></p>
         <linea-larga></linea-larga>
-        <h2>Nos apoyamos en la colaboración entre disciplinas y saberes que al unirse potencian nuevas ideas para explorar nuevas posibilidades.</h2>
+        <h2>{{ nosotrosdata.alianzas.b2 | safe }}</h2>
         <alianzas>
-            <alianza>
-                <nombre>The White Lodge</nombre>
-                <direccion>visitar</direccion>
+            {% for alianza in alianzas %}
+                <alianza>
+                <nombre>{{ alianza.titulo | safe }}</nombre>
+                {% for link in alianza.links %}
+                     <direccion onclick="window.open('{{ link }}','_blank');">visitar</direccion>
+                {% endfor %}
+
             </alianza>
-            <alianza>
-                <nombre>Universidad Nacional de Cordoba</nombre>
-                <direccion>LINK 1</direccion>
-            </alianza>
-            <alianza>
-                <nombre>Red de gestion Cultural Publica</nombre>
-                <direccion>https://www.redgestioncultural.org/quienes-somos</direccion>
-            </alianza>
+            {% endfor %}
+
         </alianzas>
         <space></space>
         <space></space>
@@ -145,12 +106,12 @@ privado y el tercer sector en
 <section-large id="personas" class="set-background-gradient-3" style="z-index: 20">
     <generic-page>
         <space></space>
-        <h1>un equipo multi-disciplinario de profesionales</h1>
+        <h1>{{ nosotrosdata.personas.b1 | safe }}</h1>
 
-        <figcaption><h1>PERSONAS</h1></figcaption>
+        <figcaption><h1>{{ nosotrosdata.personas.fig | safe }}</h1></figcaption>
         <p></p>
         <linea-larga></linea-larga>
-        <h2>Creemos en la intersección de saberes y en la riqueza de las perspectivas diversas para construir nuestros proyectos.</h2>
+        <h2>{{ nosotrosdata.personas.b2 | safe }}</h2>
 
         <personas>
             <persona>

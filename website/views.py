@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import json
 
-from website.models import Scrollytelling, Bloques, Tags, Proyecto, Direcciones
+from website.models import Scrollytelling, Bloques, Tags, Proyecto, Direcciones, Alianza
 from website.preprocess import preprocess_general
 
 from django.core import serializers
@@ -62,13 +62,21 @@ def nosotros(request):
     data={}
     menu = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
     contact = Bloques.objects.all().filter(titulo="contactformdata", lenguaje="esp").first()
+    nosotros = Bloques.objects.all().filter(titulo="nosotroshome", lenguaje="esp").first()
 
     data["menuover"] = json.loads(menu.json)
+    data["nosotrosdata"] = json.loads(nosotros.json)
     data["contact"] = {}
     data["contact"]["data"]={}
     data["contact"]["data"]["info"]=json.loads(contact.json)
     direcciones = Direcciones.objects.all().filter(publicado=True).order_by("pais")
     data["contact"]["data"]["direcciones"] = direcciones
+
+    alianzas = Alianza.objects.all()
+    data["alianzas"] = []
+    for alianza in alianzas:
+        data["alianzas"].append({"titulo":alianza.nombre,"links":alianza.links.split(",")})
+
 
     return render(request, "nosotros.html", data)
 
