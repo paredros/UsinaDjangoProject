@@ -1247,6 +1247,12 @@ notamini:hover over{
     /*width: 120px;*/
     font-size: 1rem;
     margin-bottom: 20px;
+    transition: 0.5s;
+}
+.footerfinal .subMid panelright direcciones direccion calle:hover{
+    cursor: pointer;
+    padding: 5px;
+    background-color: var(--fourthColor);
 }
 .footerfinal .subMid panelright direcciones direccion correo{
     font-size: 1rem;

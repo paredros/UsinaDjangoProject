@@ -24,7 +24,7 @@
                     <direccion>
                         <ciudad>{{ dir.ciudad }}</ciudad>
                         <pais>{{ dir.pais }}</pais>
-                        <calle>{{ dir.calle | safe }}</calle>
+                        <calle onclick="window.open('{{ dir.geolink | safe }}',target='_blank')">{{ dir.calle | safe }}</calle>
                         <correo>{{ dir.correo }}</correo>
                         <telefono>{{ dir.telefono }}</telefono>
 
