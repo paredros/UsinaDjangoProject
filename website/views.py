@@ -80,6 +80,10 @@ def nosotros(request):
 
     return render(request, "nosotros.html", data)
 
+def vivousina(request, slug=None):
+
+    return render(request, "vivousina.html")
+
 def get_ajax_data(request, slug=None):
     data = {}
 

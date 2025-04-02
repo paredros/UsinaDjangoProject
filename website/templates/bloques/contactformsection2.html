@@ -25,9 +25,8 @@
                         <ciudad>{{ dir.ciudad }}</ciudad>
                         <pais>{{ dir.pais }}</pais>
                         <calle onclick="window.open('{{ dir.geolink | safe }}',target='_blank')">{{ dir.calle | safe }}</calle>
-                        <correo>{{ dir.correo }}</correo>
-                        <telefono>{{ dir.telefono }}</telefono>
-
+                        <correo onclick="window.open('mailto:{{ dir.correo }}')">{{ dir.correo }}</correo>
+                        <telefono onclick="window.open('tel:{{ dir.telefono }}')">{{ dir.telefono }}</telefono>
                     </direccion>
                 {% endfor %}
 
