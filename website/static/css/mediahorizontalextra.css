@@ -113,7 +113,7 @@
         visibility: hidden;
     }
     .endpage .dataGroup:hover .data{
-        width: 90% !important;
+        /*width: 90% !important;*/
         
     }
     .endpage .dataGroup .data indice{

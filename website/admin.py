@@ -23,8 +23,15 @@ class TagsAdmin(admin.ModelAdmin):
     class Meta:
         model = Tags
 
+class NotaImagenInline(admin.StackedInline):
+    model = NotaImagenArchivo
+
+class NotaPersonasInline(admin.StackedInline):
+    model = NotaAutor
+
 @admin.register(Nota)
 class NotaAdmin(admin.ModelAdmin):
+    inlines = [NotaImagenInline, NotaPersonasInline]
     class Meta:
         model = Nota
 

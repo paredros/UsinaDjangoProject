@@ -33,7 +33,7 @@ def preprocess_endpage():
     data["tags"] = tags
     servicios = Proyecto.objects.all().filter(publicado=True, orden_portada__gt=0, es_servicio=True).order_by("orden_portada")
     data["servicios"] = servicios
-    notas = Nota.objects.all().filter(orden_portada__gt=0).order_by("orden_portada")
+    notas = Nota.objects.all().filter(orden_portada__gt=0,publicar=True).order_by("orden_portada")
     data["notas"] = notas
     return data
 

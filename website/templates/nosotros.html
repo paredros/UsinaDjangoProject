@@ -114,62 +114,18 @@
         <h2>{{ nosotrosdata.personas.b2 | safe }}</h2>
 
         <personas>
-            <persona>
+            {% for persona in personas %}
+                <persona>
                 <foto>
-                    <img src="/media/images/proyectos/nunsacat1.jpeg" alt="">
+                    <img src="{{ persona.foto.url }}">
                 </foto>
-                <nombre>Matias Brusa</nombre>
-                <cargo>Presidente Mundial</cargo>
-                <over><p>Licenciado en educación, gestor
-cultural y emprendedor en el
-campo del arte con más de 20 años
-de experiencia en el desarrollo de
-producciones artísticas y
-activaciones con propósito para
-marcas en espacio público.</p></over>
-            </persona>
-            <persona>
-                <foto>
-                    <img src="/media/images/proyectos/nunsacat1.jpeg" alt="">
-                </foto>
-                <nombre>Matias Brusa Brusanovich</nombre>
-                <cargo>Presidente Mundial</cargo>
-                <over><p>Licenciado en educación, gestor
-cultural y emprendedor en el
-campo del arte con más de 20 años
-de experiencia en el desarrollo de
-producciones artísticas y
-activaciones con propósito para
-marcas en espacio público.</p></over>
-            </persona>
-            <persona>
-                <foto>
-                    <img src="/media/images/proyectos/nunsacat1.jpeg" alt="">
-                </foto>
-                <nombre>Matias Brusa</nombre>
-                <cargo>Presidente Mundial</cargo>
-                <over><p>Licenciado en educación, gestor
-cultural y emprendedor en el
-campo del arte con más de 20 años
-de experiencia en el desarrollo de
-producciones artísticas y
-activaciones con propósito para
-marcas en espacio público.</p></over>
-            </persona>
-            <persona>
-                <foto>
-                    <img src="/media/images/proyectos/nunsacat1.jpeg" alt="">
-                </foto>
-                <nombre>Matias Brusa</nombre>
-                <cargo>Presidente Mundial</cargo>
-            </persona>
-            <persona>
-                <foto>
-                    <img src="/media/images/proyectos/nunsacat1.jpeg" alt="">
-                </foto>
-                <nombre>Matias Brusa</nombre>
-                <cargo>Presidente Mundial</cargo>
-            </persona>
+                <nombre>{{ persona.nombre }}</nombre>
+                <cargo>{{ persona.posicion | safe}}</cargo>
+                <over><p>{{ persona.resume | safe }}</p></over>
+                </persona>
+            {% endfor %}
+
+
         </personas>
     </generic-page>
 

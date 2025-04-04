@@ -160,6 +160,13 @@ persona nombre{
     line-height: 1.5rem;
     text-transform:uppercase;
     text-align: center;
+    font-weight: 400;
+}
+persona cargo{
+    font-size: 1.1rem;
+    line-height: 1.1rem;
+    text-align: center;
+    font-weight: 100;
 }
 persona over{
     position: absolute;
@@ -245,6 +252,9 @@ frameimage h3{
 }
 .footerfinal{
     z-index: 25;
+}
+.menu-over holder{
+    background-color: white;
 }
 @media (max-aspect-ratio: 6/7) {
     .flex-horizontal {

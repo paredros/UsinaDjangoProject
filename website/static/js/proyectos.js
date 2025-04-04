@@ -87,7 +87,7 @@ core.buildContent=function (data){
     if(data.imagenes.length>0){
         imagenes+="<imagenes-archivo>"
         for(let i=0; i<data.imagenes.length; i++){
-            console.log(data.imagenes[i])
+
             imagenes+='<img src="'+data.imagenes[i]+'" alt="">'
         }
         imagenes+="</imagenes-archivo>"

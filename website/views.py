@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import json
 
-from website.models import Scrollytelling, Bloques, Tags, Proyecto, Direcciones, Alianza
+from website.models import Scrollytelling, Bloques, Tags, Proyecto, Direcciones, Alianza, Nota, Persona
 from website.preprocess import preprocess_general
 
 from django.core import serializers
@@ -63,7 +63,9 @@ def nosotros(request):
     menu = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
     contact = Bloques.objects.all().filter(titulo="contactformdata", lenguaje="esp").first()
     nosotros = Bloques.objects.all().filter(titulo="nosotroshome", lenguaje="esp").first()
+    personas = Persona.objects.all().filter(es_externo=False).order_by("orden_portada")
 
+    data["personas"] = personas
     data["menuover"] = json.loads(menu.json)
     data["nosotrosdata"] = json.loads(nosotros.json)
     data["contact"] = {}
@@ -81,8 +83,18 @@ def nosotros(request):
     return render(request, "nosotros.html", data)
 
 def vivousina(request, slug=None):
+    data = {}
+    menu = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
 
-    return render(request, "vivousina.html")
+    data["menuover"] = json.loads(menu.json)
+    if slug==None:
+        notas = Nota.objects.all().filter(publicar=True)
+        data["notas"] = notas
+    else:
+        if Nota.objects.all().filter(slug=slug).exists():
+            nota = Nota.objects.get(slug=slug)
+            data["nota"] = nota
+    return render(request, "vivousina.html", data)
 
 def get_ajax_data(request, slug=None):
     data = {}

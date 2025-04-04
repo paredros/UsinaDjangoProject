@@ -27,22 +27,92 @@
     <link rel="stylesheet" href="{% static 'css/mediavertical.css' %}">
     <link rel="stylesheet" href="{% static 'css/mediahorizontalextra.css' %}">
     <link rel="stylesheet" href="{% static 'css/generic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vivousina.css' %}">
 
 </head>
 <body>
+<script>
+    globalOnPreInitRun=[]
+</script>
 <section-large>
     <generic-page>
-        <h1>un texto sobre el blog y lo que usina va a decir aca</h1>
+        <h1>lee directo de nuestras mentes. adentrate en el corazon de <b>usina</b></h1>
         <figcaption><h1>VIVO USINA</h1></figcaption>
         <p></p>
         <linea-larga></linea-larga>
-        <tags>
+        <!--tags>
             <span>Arte</span>
             <span>Claro</span>
             <span>Infografia</span>
-        </tags>
-        <space></space>
+        </tags-->
+        {% if notas is not None %}
+        <notas>
+            {% for nota in notas %}
+                <notamini>
+                    <img src="{{nota.imagen_principal.url}}" alt="{{nota.titulo}}">
+                    <titulo>{{ nota.titulo}}</titulo>
+                    <copete>{{ nota.copete}}</copete>
+                    <over><span>ABRIR</span><p>{{ nota.titulo}}</p></over>
+                </notamini>
+            {% endfor %}
+        </notas>
+        {% endif %}
+        {% if nota is not None %}
+            <nota-page>
+
+                <subtitulo>{{ nota.slide_text | safe }}</subtitulo>
+                <big-image>
+                    <img src="{{nota.imagen_principal.url}}">
+                </big-image>
+                <space></space>
+                <titulo>{{ nota.titulo | safe }}</titulo>
+                <copete>{{ nota.copete | safe }}</copete>
+                <texto>
+                    {{ nota.texto | safe }}
+                </texto>
+                {% if nota.notaimagenarchivo_set.count > 0 %}
+                    <imagenes-archivo>
+                    {% for imagen in nota.notaimagenarchivo_set.all %}
+
+                        <img src="{{imagen.imagen.url}}">
+                    {% endfor %}
+                    </imagenes-archivo>
+                {% endif %}
+                <slide-text>{{ nota.slide_text | safe }}</slide-text>
+            <space></space>
+            <personas>
+                {% for persona in nota.notaautor_set.all %}
+                    <persona>
+                    <foto>
+                        <img src="{{ persona.persona.foto.url }}">
+                    </foto>
+                    <nombre>{{ persona.persona.nombre }}</nombre>
+                    <cargo>{{ persona.persona.posicion | safe}}</cargo>
+                    <over><p>{{ persona.persona.resume | safe }}</p></over>
+                    </persona>
+                {% endfor %}
+            </personas>
+            {% if nota.external_autor is not None %}
+            <autor>{{ nota.external_autor | safe }}</autor>
+                {% endif %}
+            <fuente>{{ nota.source | safe }}</fuente>
+
+            <linea-larga></linea-larga>
+            <fecha>{{ nota.fecha|date:"d/m/Y" }}</fecha>
+            <space></space>
+            <figcaption><h1>VIVO USINA</h1></figcaption>
+            </nota-page>
+
+        {% endif %}
+
+    <space></space>
+    <space></space>
     </generic-page>
 </section-large>
+{% include "bloques/footerblue.html" %}
+{% include "bloques/hud2.html" %}
+{% include "bloques/menuover.html" with menuover=menuover%}
+<script src="{% static 'js/textFit.js' %}"></script>
+    <script src="{% static 'js/simplepage.js' %}" type="module"></script>
 </body>
 </html>

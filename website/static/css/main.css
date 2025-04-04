@@ -877,6 +877,7 @@ slide-title-text texto .word{
     bottom: 27px;
     font-size: 2rem;
     font-weight: 100;
+    transition: 0.3s;
 }
 .endpage .dataGroup .data botonir{
     position:absolute;
@@ -916,9 +917,12 @@ slide-title-text texto .word{
 .endpage .dataGroup:hover lineaLarga {
     background-color: var(--secondColor);
 }
+.endpage .dataGroup:hover indice{
+    margin-left: 10px;
+}
 .endpage .dataGroup:hover datos{
-    right: 5px !important;
-    opacity: 0;
+    right: 15px !important;
+    /*opacity: 0;*/
 }
 .endpage .dataGroup:hover group{
     height: 65px;
@@ -1038,7 +1042,7 @@ slide-title-text texto .word{
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 30px;
-    margin-left: 5%;
+    margin-left: 7%;
 }
 .endpage .cierre{
     /*flex: 1;*/
@@ -1053,43 +1057,45 @@ slide-title-text texto .word{
 
 
 notamini{
-    margin-bottom: 30px;
-    flex: 0 1 20%;
-    min-width: 200px;
-    height: 300px;
-    margin-left: 7%;
+
     display: block;
-    background-color: var(--thirdColor);
+    /*background-color: var(--thirdColor);*/
+    background-color: #fff;
     overflow: hidden;
     position: relative;
 
+    margin: 2%;
     margin-bottom: 10px;
     /*flex: 1 1 100%;*/
     flex: 1 1;
     min-width: 300px;
     /*max-width: 500px;*/
-    height: 300px;
-    margin-left: 2%;
-    
-    
+    /*height: 300px;*/
+    height: fit-content;
 }
 notamini img{
     width: 100%;
-    height: 50%;
+    height: 300px;
     object-fit: cover;
 }
 notamini titulo{
-    padding: 5px;
+
+    padding: 5px 15px;
     display: block;
     font-size: 1.5rem;
     font-weight: bold;
+    text-transform:uppercase;
 }
 notamini copete{
-    height: 20%;
-    padding: 5px;
-    width: 100%;
+
+    /*height: 20%;*/
+    padding: 15px;
+    /*width: 100%;*/
     display: block;
     overflow: hidden;
+    padding-bottom: 25px;
+    padding-top: 0px;
+
 }
 notamini over{
     position: absolute;
@@ -1103,13 +1109,14 @@ notamini over{
     
 }
 notamini over span{
-    padding: 5px;
+    padding: 15px;
     font-size: 2rem;
+    line-height: 4rem;
     font-weight: bold;
     color: var(--thirdColor);
 }
 notamini over p{
-    padding: 5px;
+    padding: 15px;
     font-size: 2rem;
     font-weight: 100;
     color: var(--thirdColor);

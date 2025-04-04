@@ -282,15 +282,15 @@
     }
 
 
-    notamini{
+    /*notamini{
         margin-bottom: 10px;
-        /*flex: 1 1 100%;*/
+
         flex: 1 1;
         min-width: 300px;
-        /*max-width: 500px;*/
+
         height: 300px;
         margin-left: 2%;
-    }
+    }*/
 
 
     .footerfinal linea{
