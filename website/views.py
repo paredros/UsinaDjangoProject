@@ -85,8 +85,9 @@ def nosotros(request):
 def vivousina(request, slug=None):
     data = {}
     menu = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
-
+    vivohome = Bloques.objects.all().filter(titulo="vivohome", lenguaje="esp").first()
     data["menuover"] = json.loads(menu.json)
+    data["vivohome"] = json.loads(vivohome.json)
     if slug==None:
         notas = Nota.objects.all().filter(publicar=True)
         data["notas"] = notas

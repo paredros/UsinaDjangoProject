@@ -110,3 +110,8 @@ nota-page fecha{
     line-height: 1rem;
     font-weight: 100;
 }
+figcaption h1:hover{
+    cursor: pointer;
+    background-color: var(--fourthColor);
+    color: var(--secondColor);
+}

@@ -7,7 +7,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USINA::VIVO</title>
+    <title>USINA::{{ vivohome.titulo }}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="importmap">
         {
@@ -36,8 +36,8 @@
 </script>
 <section-large>
     <generic-page>
-        <h1>lee directo de nuestras mentes. adentrate en el corazon de <b>usina</b></h1>
-        <figcaption><h1>VIVO USINA</h1></figcaption>
+        <h1>{{ vivohome.copete | safe}}</h1>
+        <figcaption onclick="window.open({% url 'vivo' %},target='_self');return false;"><h1>{{ vivohome.titulo | safe}}</h1></figcaption>
         <p></p>
         <linea-larga></linea-larga>
         <!--tags>
@@ -48,7 +48,7 @@
         {% if notas is not None %}
         <notas>
             {% for nota in notas %}
-                <notamini>
+                <notamini onclick="window.open('{% url 'vivo' %}{{ nota.slug }}',target='_self');return false;">
                     <img src="{{nota.imagen_principal.url}}" alt="{{nota.titulo}}">
                     <titulo>{{ nota.titulo}}</titulo>
                     <copete>{{ nota.copete}}</copete>
@@ -59,14 +59,17 @@
         {% endif %}
         {% if nota is not None %}
             <nota-page>
-
-                <subtitulo>{{ nota.slide_text | safe }}</subtitulo>
+                {% if nota.subtitulo is not None %}
+                <subtitulo>{{ nota.subtitulo | safe }}</subtitulo>
+                {% endif %}
                 <big-image>
                     <img src="{{nota.imagen_principal.url}}">
                 </big-image>
                 <space></space>
                 <titulo>{{ nota.titulo | safe }}</titulo>
+                {% if nota.copete is not None %}
                 <copete>{{ nota.copete | safe }}</copete>
+                {% endif %}
                 <texto>
                     {{ nota.texto | safe }}
                 </texto>
@@ -78,7 +81,9 @@
                     {% endfor %}
                     </imagenes-archivo>
                 {% endif %}
+                {% if nota.slide_text is not None %}
                 <slide-text>{{ nota.slide_text | safe }}</slide-text>
+                {% endif %}
             <space></space>
             <personas>
                 {% for persona in nota.notaautor_set.all %}
@@ -100,7 +105,7 @@
             <linea-larga></linea-larga>
             <fecha>{{ nota.fecha|date:"d/m/Y" }}</fecha>
             <space></space>
-            <figcaption><h1>VIVO USINA</h1></figcaption>
+            <figcaption onclick="window.open({% url 'vivo' %},target='_self');return false;"><h1>{{ vivohome.titulo | safe }}</h1></figcaption>
             </nota-page>
 
         {% endif %}
