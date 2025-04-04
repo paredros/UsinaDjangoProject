@@ -25,8 +25,12 @@
                             {% endif %}
                             <tags>
                                 {% for tag in slide.tags.all %}
-                                    <span>{{ tag }}</span>
-                                    {% endfor %}
+                                    {% if slide.es_servicio %}
+                                    <span onclick="window.open('{% url 'soluciones' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag }}</span>
+                                    {% else %}
+                                    <span onclick="window.open('{% url 'proyectos' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag }}</span>
+                                    {% endif %}
+                                {% endfor %}
 
                             </tags>
                             <figcaption>
@@ -34,13 +38,18 @@
                                 <h1>{{ slide.slide_text}}</h1>
 
                             </figcaption>
-                            <boton-naranja id="{{ slide.slug }}">VER</boton-naranja>
-                            <script>
+                            {% if slide.es_servicio %}
+                            <boton-naranja id="{{ slide.slug }}" onclick="window.open('{% url 'soluciones' %}{{ slide.slug }}',target='_self');return false">
+                                {{ bloque_data.ver | safe }}</boton-naranja>
+                            {% else %}
+                            <boton-naranja id="{{ slide.slug }}" onclick="window.open('{% url 'proyectos' %}{{ slide.slug }}',target='_self');return false">{{ bloque_data.ver | safe }}</boton-naranja>
+                            {% endif %}
+                            <!--script>
                                 document.getElementById("{{ slide.slug }}").onclick = function(){
                                     //alert("{{ slide.slug }}");
                                     TryLoadProyecto("{{ slide.slug }}");
                                 }
-                            </script>
+                            </script-->
                         </datos>
                     </proyecto>
                 {% elif bloque_data.tipo == "texto" %}
@@ -66,7 +75,7 @@
                 <proyecto class="only-hidden"></proyecto>
             {% endfor %}
         </holder>
-        <skip-button id="{{ bloque_data.skip_id }}"><span>SALTEAR</span></skip-button>
+        <skip-button id="{{ bloque_data.skip_id }}"><span>{{ bloque_data.saltear | safe }}</span></skip-button>
     </{{ bloque_data.section_type }}>
 </section>
 <half-section class="only-hidden"></half-section>

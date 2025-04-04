@@ -1,3 +1,5 @@
+from django.db.models import Count
+
 from website.models import *
 import json
 
@@ -11,9 +13,20 @@ def preprocess_general(tipo):
         data = preprocess_servicios_selected()
     elif tipo == "endpage":
         data = preprocess_endpage()
+    elif tipo == "landing":
+        data = preprocess_landing()
     elif tipo == "contactformdata":
         data = preprocess_contactformdata()
     return data
+
+
+def preprocess_landing():
+    data = {}
+    tags = Tags.objects.all().exclude(tag="Proyecto").filter(proyecto__es_servicio=False).annotate(
+        count=Count('proyecto__slug')).order_by('-count', 'tag')
+    data["tags"] = tags
+    return data
+
 
 def preprocess_proyectos_selected():
     data = {}
@@ -29,7 +42,7 @@ def preprocess_servicios_selected():
 
 def preprocess_endpage():
     data = {}
-    tags = Tags.objects.all().order_by("tag")
+    tags = Tags.objects.all().exclude(tag="Proyecto").filter(proyecto__es_servicio=False).annotate(count = Count('proyecto__slug')).order_by('-count','tag')
     data["tags"] = tags
     servicios = Proyecto.objects.all().filter(publicado=True, orden_portada__gt=0, es_servicio=True).order_by("orden_portada")
     data["servicios"] = servicios

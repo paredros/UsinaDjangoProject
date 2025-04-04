@@ -17,12 +17,12 @@
         <section>
             <h1>{{ menuover.navegacion.titulo }}</h1>
             <linea></linea>
-            <p>{{ menuover.navegacion.home }}</p>
-            <p>{{ menuover.navegacion.proyectos }}</p>
-            <p>{{ menuover.navegacion.soluciones }}</p>
-            <p>{{ menuover.navegacion.nosotros }}</p>
-            <p>{{ menuover.navegacion.vivo }}</p>
-            <p>{{ menuover.navegacion.contactanos }}</p>
+            <p onclick="window.open(`{% url 'index' %}`,target='_self');return false">{{ menuover.navegacion.home }}</p>
+            <p onclick="window.open(`{% url 'proyectos' %}`,target='_self');return false">{{ menuover.navegacion.proyectos }}</p>
+            <p onclick="window.open(`{% url 'soluciones' %}`,target='_self');return false">{{ menuover.navegacion.soluciones }}</p>
+            <p onclick="window.open(`{% url 'nosotros' %}`,target='_self');return false">{{ menuover.navegacion.nosotros }}</p>
+            <p onclick="window.open(`{% url 'vivo' %}`,target='_self');return false">{{ menuover.navegacion.vivo }}</p>
+            <p onclick="window.open(`{% url 'nosotros' %}#contacto`,target='_self');return false">{{ menuover.navegacion.contactanos }}</p>
         </section>
 
         <section>

@@ -5,30 +5,31 @@
 
     </logo-completo>
     <sub-logo>
-        <h1>Arte.Ciencia.</h1>
-        <h1>Comunidad.</h1>
+        {{ bloque_data.sublogo | safe}}
     </sub-logo>
     <issue>
-        <h2>Seasson</h2>
-        <h1>25</h1>
+        {{ bloque_data.issue | safe}}
     </issue>
     <texto1>
         <div>
-            Donde Crecen Las <b>Ideas</b>
+            {{ bloque_data.texto1 | safe }}
         </div>
     </texto1>
     <tags>
-        <span>Arte</span>
+        {% for tag in bloque_data.data.tags.all %}
+            <span onclick="window.open('{% url 'proyectos' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag.tag }}</span>
+        {% endfor %}
+        <!--span>Arte</span>
         <span>Tecnologia</span>
         <span>Social</span>
         <span>EspacioPublico</span>
-        <!--span>Exposicion</span-->
+
         <span>Data</span>
         <span>MedioAmbiente</span>
         <span>Educacion</span>
-        <!--span>Comunicacion</span-->
+        <span>Comunicacion</span-->
     </tags>
-    <texto2><b>Laboratorio</b> Permanente</texto2>
+    <texto2>{{ bloque_data.texto2 | safe }}</texto2>
     <!--bottom>
         <h1>BIENVENIDO</h1>
         <linea-larga></linea-larga>

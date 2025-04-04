@@ -20,8 +20,8 @@ def index(request):
 
     test["menuover"] = json.loads(info.json)
 
-    print(test["bloques"][0])
-    print(test["preload"])
+    #print(test["bloques"][0])
+    #print(test["preload"])
 
     return render(request, "index_es.html", {"testeo":"Que onda", "data":test})
 

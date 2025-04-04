@@ -100,8 +100,9 @@
             {% if nota.external_autor is not None %}
             <autor>{{ nota.external_autor | safe }}</autor>
                 {% endif %}
+            {% if nota.source is not None %}
             <fuente>{{ nota.source | safe }}</fuente>
-
+            {% endif %}
             <linea-larga></linea-larga>
             <fecha>{{ nota.fecha|date:"d/m/Y" }}</fecha>
             <space></space>
