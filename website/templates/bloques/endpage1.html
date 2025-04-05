@@ -10,7 +10,7 @@
         <div class="subMid">
             {% for linea in bloque_data.lineas %}
                 {% if linea.tipo == "titulo" %}
-                    <div class="dataGroup"  id="endpage-{{ linea.navdir }}">
+                    <div class="dataGroup"  id="endpage-{{ linea.navdir }}" onclick="window.open('{% url linea.navdir %}',target='_self');return false">
                         <div class="data">
                             <indice>{{ linea.indice }}</indice>
                             <lineaCorta></lineaCorta>
@@ -23,51 +23,51 @@
                             <textoir>{{ linea.textoir }}</textoir>
                         </div>
                     </div>
-                    <script>
+                    <!--script>
                         document.getElementById("endpage-{{ linea.navdir }}").onclick = function(){
                             alert("{{ linea.navdir}}");
                             TryNavigation("{{ linea.navdir }}");
                         }
-                    </script>
+                    </script-->
                 {% elif linea.tipo == "tags" %}
                     <tags>
                     {% for tag in bloque_data.data.tags.all %}
-                        <span>{{ tag }}</span>
+                        <span onclick="window.open('{% url 'proyectos' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag }}</span>
                     {% endfor %}
                     </tags>
                 {% elif linea.tipo == "soluciones" %}
                     <servicios>
                     {% for servicio in bloque_data.data.servicios %}
-                        <span>{{ servicio.titulo }}</span>
+                        <span onclick="window.open('{% url 'soluciones' %}{{ servicio.slug }}',target='_self');return false">{{ servicio.titulo }}</span>
                     {% endfor %}
                     </servicios>
                 {% elif linea.tipo == "sublinks" %}
                     <sublinks>
                         {% for sublink in linea.links %}
-                            <span id="sublink-{{ sublink.navdir }}">{{ sublink.texto }}</span>
-                            <script>
+                            <span id="sublink-{{ sublink.navdir }}" onclick="window.open('{% url 'nosotros' %}#{{ sublink.navdir }}',target='_self');return false">{{ sublink.texto }}</span>
+                            <!--script>
                                 document.getElementById("sublink-{{ sublink.navdir }}").onclick = function(){
                                     alert("{{ sublink.navdir}}");
                                     TryNavigation("{{ sublink.navdir }}");
                                 }
-                            </script>
+                            </script-->
                         {% endfor %}
                     </sublinks>
                 {% elif linea.tipo == "notas" %}
                     <div class="notas">
                         {% for nota in bloque_data.data.notas %}
-                            <notamini id="nota-{{nota.slug}}">
+                            <notamini id="nota-{{nota.slug}}" onclick="window.open('{% url 'vivo' %}{{ nota.slug }}',target='_self');return false">
                               <img src="{{ nota.imagen_principal.url }}"  alt="">
                               <titulo>{{ nota.titulo}}</titulo>
                               <copete>{{ nota.copete}}</copete>
                               <over><span>ABRIR</span><p>{{ nota.titulo}}</p></over>
                             </notamini>
-                            <script>
+                            <!--script>
                                 document.getElementById("nota-{{ nota.slug }}").onclick = function(){
                                     alert("{{ nota.slug}}");
                                     TryOpenNota("{{ nota.slug }}");
                                 }
-                            </script>
+                            </script-->
                         {% endfor %}
                     </div>
                 {% endif %}

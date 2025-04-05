@@ -100,8 +100,8 @@ nota-page autor{
 }
 nota-page fuente{
     display: block;
-    font-size: 1rem;
-    line-height: 1rem;
+    font-size: 0.75rem;
+    line-height: 0.75rem;
     font-weight: bolder;
 }
 nota-page fecha{
@@ -114,4 +114,26 @@ figcaption h1:hover{
     cursor: pointer;
     background-color: var(--fourthColor);
     color: var(--secondColor);
+}
+@media (max-aspect-ratio: 6/7) {
+    nota-page titulo{
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+    }
+    nota-page subtitulo{
+        font-size: 2.25rem;
+        line-height: 2.25rem;
+    }
+    nota-page copete{
+        font-size: 1.75rem;
+        line-height: 1.75rem;
+    }
+    nota-page texto{
+        font-size: 1.25rem;
+        line-height: 1.25rem;
+    }
+    nota-page slide-text{
+        font-size: 2rem;
+        line-height: 2rem;
+    }
 }

@@ -5,17 +5,17 @@
     <div class="subMid">
       <linea></linea>
       <redes>
-        <red>INSTAGRAM</red>|
-        <red>YOUTUBE</red>|
-        <red>LINKEDIN</red>
+        <red onclick="window.open(`{{ menuover.links.instagram }}`,target='_blank');return false">{{ menuover.redes.instagram }}</red>|
+        <red onclick="window.open(`{{ menuover.links.youtube }}`,target='_blank');return false">{{ menuover.redes.youtube }}</red>|
+        <red onclick="window.open(`{{ menuover.links.linkedin }}`,target='_blank');return false">{{ menuover.redes.linkedin }}</red>
       </redes>
       <microlinks>
-        <p onclick="window.open(`{% url 'index' %}`,target='_self');return false">HOME</p>
-        <p onclick="window.open(`{% url 'proyectos' %}`,target='_self');return false">PROYECTOS</p>
-        <p onclick="window.open(`{% url 'soluciones' %}`,target='_self');return false">SOLUCIONES</p>
-        <p onclick="window.open(`{% url 'nosotros' %}`,target='_self');return false">NOSOTROS</p>
-        <p onclick="window.open(`{% url 'vivo' %}`,target='_self');return false">VIVO USINA</p>
-        <p onclick="window.open(`{% url 'nosotros' %}#contacto`,target='_self');return false">CONTACTANOS</p>
+        <p onclick="window.open(`{% url 'index' %}`,target='_self');return false">{{ menuover.navegacion.home }}</p>
+        <p onclick="window.open(`{% url 'proyectos' %}`,target='_self');return false">{{ menuover.navegacion.proyectos }}</p>
+        <p onclick="window.open(`{% url 'soluciones' %}`,target='_self');return false">{{ menuover.navegacion.soluciones }}</p>
+        <p onclick="window.open(`{% url 'nosotros' %}`,target='_self');return false">{{ menuover.navegacion.nosotros }}</p>
+        <p onclick="window.open(`{% url 'vivo' %}`,target='_self');return false">{{ menuover.navegacion.vivo }}</p>
+        <p onclick="window.open(`{% url 'nosotros' %}#contacto`,target='_self');return false">{{ menuover.navegacion.contactanos }}</p>
       </microlinks>
     </div>
     <div class="subRight">

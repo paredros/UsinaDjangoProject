@@ -35,17 +35,17 @@ window.addEventListener("load", (event) => {
 core.buildContent=function (data){
     core.currentId++;
     let ficha = ""
-    if(data.data.anio!=""){
+    if(data.data.anio!="" && data.data.anio != null){
         ficha+='<fecha>'+core.labels.fecha+': <b>'+data.data.anio+'</b></fecha>'
     }
     let hayCiudad=false;
-    if(data.data.ciudad !="" || data.data.pais!=""){
+    if((data.data.ciudad !="" || data.data.pais!="") && (data.data.ciudad !=null || data.data.pais!=null)){
         ficha+='<ubicacion>'+core.labels.ubicacion+': '
-        if(data.data.ciudad !="" ){
+        if(data.data.ciudad !="" && data.data.ciudad!=null){
             hayCiudad=true;
             ficha+='<b>'+data.data.ciudad+'</b>'
         }
-        if(data.data.pais!=""){
+        if(data.data.pais!="" && data.data.pais!=null){
             if(hayCiudad){
                 ficha+=' | '
             }
@@ -54,17 +54,17 @@ core.buildContent=function (data){
         ficha+='</ubicacion>'
     }
     let part=""
-    if(data.data.entes!=""){
+    if(data.data.entes!="" && data.data.entes!=null){
         part+="<b>"+data.data.entes+"</b><br>"
     }
-    if(data.data.artistas!=""){
+    if(data.data.artistas!="" && data.data.artistas!=null){
         part+="<b>"+data.data.artistas+"</b><br>"
     }
-    if(data.data.marcas!=""){
+    if(data.data.marcas!="" && data.data.marcas!=null){
         part+="<b>"+data.data.marcas+"</b><br>"
     }
     if(part!=""){
-        ficha+="<entes>'+core.labels.participaron+': "+part+"</entes>"
+        ficha+="<entes>"+core.labels.participaron+": "+part+"</entes>"
     }
     let tags_t="<tags>"
 

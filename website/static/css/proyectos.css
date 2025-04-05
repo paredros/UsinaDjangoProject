@@ -356,7 +356,7 @@ content-detalle texto-largo p indice{
 }
 @media (max-aspect-ratio: 7/6){
     proyectos-page h1{
-        font-size: 3rem;
-        line-height: 3rem;
+        font-size: 2.5rem;
+        line-height: 2.5rem;
     }
 }

@@ -115,9 +115,9 @@
     <space></space>
     </generic-page>
 </section-large>
-{% include "bloques/footerblue.html" %}
+{% include "bloques/footerblue.html" with menuover=menuover %}
 {% include "bloques/hud2.html" %}
-{% include "bloques/menuover.html" with menuover=menuover%}
+{% include "bloques/menuover.html" with menuover=menuover %}
 <script src="{% static 'js/textFit.js' %}"></script>
     <script src="{% static 'js/simplepage.js' %}" type="module"></script>
 </body>

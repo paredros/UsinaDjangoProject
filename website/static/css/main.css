@@ -1511,7 +1511,7 @@ notamini:hover over{
     left: 0;
     width: 100vw;
     height: fit-content;
-    background-color: var(--thirdColor);
+    background-color: white;
     z-index: 950;
     display: flex;
     flex-wrap: wrap;

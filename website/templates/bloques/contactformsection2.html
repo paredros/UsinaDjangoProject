@@ -6,6 +6,7 @@
           <panelleft>
             <h1>{{ bloque_data.data.info.titulo }}</h1>
             <linea></linea>
+              <form id="contact_form" action="/contactajx" method="Post">
             <input type="text" id="fname" name="firstname" placeholder="{{ bloque_data.data.info.placeholder_name }}">
             <input type="email" id="email" name="email" placeholder="{{ bloque_data.data.info.placeholder_email }}">
             <input type="text" id="titulo" name="titulo" placeholder="{{ bloque_data.data.info.placeholder_titulo }}">
@@ -13,7 +14,7 @@
             <textarea id="msg" name="msg" placeholder="{{ bloque_data.data.info.placeholder_msg }}" ></textarea>
 
             <input type="submit" value="{{ bloque_data.data.info.placeholder_enviar }}">
-
+              </form>
           </panelleft>
           <panelright>
             <top></top>
@@ -38,3 +39,20 @@
 
         </div>
       </div>
+<script type="text/javascript">
+    var frm = $('#contact_form');
+    frm.submit(function () {
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                $("#SOME-DIV").html(data);
+            },
+            error: function(data) {
+                $("#MESSAGE-DIV").html("Something went wrong!");
+            }
+        });
+        return false;
+    });
+</script>

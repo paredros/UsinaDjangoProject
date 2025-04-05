@@ -28,9 +28,9 @@
         <section>
             <h1>{{ menuover.redes.titulo }}</h1>
             <linea></linea>
-            <p>{{ menuover.redes.instagram }}</p>
-            <p>{{ menuover.redes.youtube }}</p>
-            <p>{{ menuover.redes.linkedin }}</p>
+            <p onclick="window.open(`{{ menuover.links.instagram }}`,target='_blank');return false">{{ menuover.redes.instagram }}</p>
+            <p onclick="window.open(`{{ menuover.links.youtube }}`,target='_blank');return false">{{ menuover.redes.youtube }}</p>
+            <p onclick="window.open(`{{ menuover.links.linkedin }}`,target='_blank');return false">{{ menuover.redes.linkedin }}</p>
         </section>
         <section id="Idioma2">
             <h1>{{ menuover.idioma.titulo }}</h1>
