@@ -34,6 +34,7 @@ urlpatterns = [
     path('nosotros/', views.nosotros, name='nosotros'),
     path('vivo/<slug:slug>', views.vivousina),
     path('vivo/', views.vivousina, name="vivo"),
+    path('contactajx/', views.contactajx, name="contactajx"),
 ]
 urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)

@@ -20,7 +20,8 @@ function textFitDoCorrection(){
         widthOnly:false,reProcess:true, alignVertWithFlexbox:false,alignVert:false});
 }
 
-window.addEventListener("load", (event) => {
+//window.addEventListener("load", (event) => {
+$(document).ready(function(){
     gsap.registerPlugin(ScrollTrigger,ScrollToPlugin);
     /*manager.build();
     manager.custom={};
@@ -39,6 +40,7 @@ window.addEventListener("load", (event) => {
     }catch (e){
 
     }
+    //textFitDo();
 });
 function showProyectos(i){
     //console.log(i.vars.onUpdateParameters.proyectos)
@@ -309,11 +311,13 @@ function init() {
 }
 
 $(document).keydown(function(e){
-    e.preventDefault();
+
     let currentPos = $(document).scrollTop()
     if(e.keyCode === 38){
+        e.preventDefault();
         gsap.to(window, { duration: 1, scrollTo: currentPos-($(window).height()/2) });
     } else if (e.keyCode === 40){
+        e.preventDefault();
         gsap.to(window, { duration: 1, scrollTo: currentPos+($(window).height()/2) });
     }
 

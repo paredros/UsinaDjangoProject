@@ -6,7 +6,8 @@
           <panelleft>
             <h1>{{ bloque_data.data.info.titulo }}</h1>
             <linea></linea>
-              <form id="contact_form" action="/contactajx" method="Post">
+
+              <form id="contact_form" action="/contactajx/" method="Post">{% csrf_token %}
             <input type="text" id="fname" name="firstname" placeholder="{{ bloque_data.data.info.placeholder_name }}">
             <input type="email" id="email" name="email" placeholder="{{ bloque_data.data.info.placeholder_email }}">
             <input type="text" id="titulo" name="titulo" placeholder="{{ bloque_data.data.info.placeholder_titulo }}">
@@ -14,6 +15,8 @@
             <textarea id="msg" name="msg" placeholder="{{ bloque_data.data.info.placeholder_msg }}" ></textarea>
 
             <input type="submit" value="{{ bloque_data.data.info.placeholder_enviar }}">
+                  <over id="alerterror" class="zero-height"><p>Error</p></over>
+                  <over id="alertsuccess" class="set-backcolor-1 zero-height"><p>THXS</p></over>
               </form>
           </panelleft>
           <panelright>
@@ -46,11 +49,46 @@
             type: frm.attr('method'),
             url: frm.attr('action'),
             data: frm.serialize(),
+            //data: {csrfmiddlewaretoken: '{{ csrf_token }}',fields:frm.serialize()},
             success: function (data) {
-                $("#SOME-DIV").html(data);
+                $('#fname').removeClass('error-field')
+                $('#email').removeClass('error-field')
+                $('#msg').removeClass('error-field')
+                //alert(data.message_type);
+                if(data.message_type==='error'){
+
+                    for(var i=0;i<data.error_list.length;i++){
+                        if(data.error_list[i] == 'firstname'){
+                            $('#fname').addClass('error-field')
+                        }
+                        if(data.error_list[i] == 'email'){
+                            $('#email').addClass('error-field')
+                        }
+                        if(data.error_list[i] == 'msg'){
+                            $('#msg').addClass('error-field')
+                        }
+                    }
+                    $('#alerterror').removeClass('zero-height');
+                    setTimeout(function () {
+                        $('#alerterror').addClass('zero-height');
+                    },1000);
+
+                }else{
+                    $('#alertsuccess').removeClass('zero-height');
+                    setTimeout(function () {
+                        $('#alertsuccess').addClass('zero-height');
+                    },1000);
+                    $('#msg').val("")
+                }
+                //$("#SOME-DIV").html(data);
             },
             error: function(data) {
-                $("#MESSAGE-DIV").html("Something went wrong!");
+                $('#alerterror').removeClass('zero-height');
+                    setTimeout(function () {
+                        $('#alerterror').addClass('zero-height');
+                    },1000);
+
+                //$("#MESSAGE-DIV").html("Something went wrong!");
             }
         });
         return false;

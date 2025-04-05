@@ -351,4 +351,7 @@
     .menu-over holder section{
         /*padding: 5px;*/
     }
+    form over{
+        width: 80vw;
+    }
   }

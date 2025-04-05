@@ -1,3 +1,4 @@
+from django.core.validators import validate_email
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import json
@@ -6,6 +7,8 @@ from website.models import Scrollytelling, Bloques, Tags, Proyecto, Direcciones,
 from website.preprocess import preprocess_general
 
 from django.core import serializers
+
+from django.views.decorators.csrf import csrf_protect
 
 
 # Create your views here.
@@ -115,3 +118,32 @@ def get_ajax_data(request, slug=None):
         img.append(imagen.imagen.url)
 
     return JsonResponse({"data":info[0]["fields"], "imagenes":img, "status":"ok"})
+
+
+def contactajx(request):
+    if request.method == "POST":
+        form = request.POST
+        firstname = form.get("firstname")
+        email = form.get("email")
+        titulo = form.get("titulo")
+        msg = form.get("msg")
+        r={}
+        r["message_type"] = "error"
+        r["error_list"] = []
+        e=True
+        if(firstname is None or firstname==""):
+            e=False
+            r["error_list"].append("firstname")
+
+        if(email is None or email==""):
+            e=False
+            r["error_list"].append("email")
+
+        if (msg is None or msg == ""):
+            e = False
+            r["error_list"].append("msg")
+
+        if e:
+            r["message_type"] = "success"
+
+    return JsonResponse(r)
