@@ -55,3 +55,7 @@ class PersonaAdmin(admin.ModelAdmin):
     class Meta:
         model = Persona
 
+@admin.register(MensajesDejados)
+class MensajesDejadosAdmin(admin.ModelAdmin):
+    class Meta:
+        model = MensajesDejados

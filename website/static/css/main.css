@@ -1613,3 +1613,18 @@ form over p{
 .zero-height{
     height: 0px;
 }
+.as-button{
+    transition: 0.3s !important;
+}
+.as-button:hover{
+    cursor: pointer;
+    background-color: var(--fourthColor) !important;
+    color: var(--secondColor) !important;
+}
+.as-button h1{
+    transition: 0.3s;
+}
+.as-button:hover h1{
+    color: var(--secondColor) !important;
+    background-color: var(--fourthColor) !important;
+}

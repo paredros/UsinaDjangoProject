@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import json
 
-from website.models import Scrollytelling, Bloques, Tags, Proyecto, Direcciones, Alianza, Nota, Persona
+from website.models import Scrollytelling, Bloques, Tags, Proyecto, Direcciones, Alianza, Nota, Persona, MensajesDejados
 from website.preprocess import preprocess_general
 
 from django.core import serializers
@@ -144,6 +144,9 @@ def contactajx(request):
             r["error_list"].append("msg")
 
         if e:
+            record = MensajesDejados.objects.create(nombre=firstname, email=email, titulo=titulo, msg=msg)
+            record.save()
             r["message_type"] = "success"
 
     return JsonResponse(r)
+

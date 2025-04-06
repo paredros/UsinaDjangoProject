@@ -160,3 +160,12 @@ class Persona(models.Model):
 class NotaAutor(models.Model):
     nota = models.ForeignKey(Nota, on_delete=models.CASCADE)
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE)
+
+class MensajesDejados(models.Model):
+    nombre = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    titulo = models.CharField(max_length=255, null=True, blank=True)
+    msg = models.TextField()
+
+    def __str__(self):
+        return self.nombre

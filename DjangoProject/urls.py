@@ -20,6 +20,13 @@ from django.urls import path
 from website import views
 from django.conf import settings
 
+import django
+
+def custom_page_not_found(request):
+    return django.views.defaults.page_not_found(request, None)
+
+def custom_server_error(request):
+    return django.views.defaults.server_error(request)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +42,9 @@ urlpatterns = [
     path('vivo/<slug:slug>', views.vivousina),
     path('vivo/', views.vivousina, name="vivo"),
     path('contactajx/', views.contactajx, name="contactajx"),
+    path("404/", custom_page_not_found),
+    path("500/", custom_server_error),
+
 ]
-urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
