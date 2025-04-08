@@ -311,6 +311,7 @@ slide-text1{
     display: grid;
     place-content: center;
     position: relative;
+    text-transform: uppercase;
 }
 
 slide-text1 p{

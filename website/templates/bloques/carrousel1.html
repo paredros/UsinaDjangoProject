@@ -28,7 +28,7 @@
                                     {% if slide.es_servicio %}
                                     <span onclick="window.open('{% url 'soluciones' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag }}</span>
                                     {% else %}
-                                    <span onclick="window.open('{% url 'proyectos' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag }}</span>
+                                    <span onclick="window.open('{% url 'proyectos' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag.name }}</span>
                                     {% endif %}
                                 {% endfor %}
 

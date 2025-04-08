@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from website import views
 from django.conf import settings
 
@@ -31,6 +31,8 @@ def custom_server_error(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    #path('<str:leng>', views.index, name='index'),
+    re_path(r'^(por|esp|eng|es|en|po)/$', views.index, name='index'),
     path('proyectos/<slug:slug>', views.proyectos),
     path('servicios/<slug:slug>', views.servicios),
     path('soluciones/<slug:slug>', views.servicios),

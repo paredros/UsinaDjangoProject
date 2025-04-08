@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 import json
 
 from website.models import Scrollytelling, Bloques, Tags, Proyecto, Direcciones, Alianza, Nota, Persona, MensajesDejados
-from website.preprocess import preprocess_general
+from website.preprocess import preprocess_general, check_lenguaje
 
 from django.core import serializers
 
@@ -12,21 +12,38 @@ from django.views.decorators.csrf import csrf_protect
 
 
 # Create your views here.
-def index(request):
-    scrollytelling = Scrollytelling.objects.first()
+def index(request, leng=None):
+
+    lenguaje = "esp"
+    if leng is not None:
+        lenguaje=check_lenguaje(leng)
+    else:
+        leng = request.COOKIES.get('lenguaje')
+        if leng is not None:
+            lenguaje=check_lenguaje(leng)
+        else:
+            val = request.session.get("lenguaje", False)
+            if val:
+                lenguaje = check_lenguaje(val)
+
+    scrollytelling = Scrollytelling.objects.filter(ready=True, lenguaje=lenguaje).first()
+    if scrollytelling is None:
+        scrollytelling = Scrollytelling.objects.filter(ready=True, lenguaje="esp").first()
     test = json.loads(scrollytelling.data)
     for bloque in test["bloques"]:
         if "preprocess" in bloque:
-            bloque["data"] = preprocess_general(bloque["preprocess"])
+            print(lenguaje + bloque["preprocess"])
+            bloque["data"] = preprocess_general(bloque["preprocess"], lenguaje)
 
     info = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
 
     test["menuover"] = json.loads(info.json)
 
-    #print(test["bloques"][0])
-    #print(test["preload"])
+    response = render(request, "index_es.html", {"testeo":"Que onda", "data":test})
+    response.set_cookie('lenguaje', lenguaje)
+    request.session["lenguaje"] = lenguaje
 
-    return render(request, "index_es.html", {"testeo":"Que onda", "data":test})
+    return response
 
 def proyectos(request, slug=None):
     data = {}

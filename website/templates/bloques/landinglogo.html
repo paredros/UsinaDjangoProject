@@ -17,7 +17,7 @@
     </texto1>
     <tags>
         {% for tag in bloque_data.data.tags.all %}
-            <span onclick="window.open('{% url 'proyectos' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag.tag }}</span>
+            <span onclick="window.open('{% url 'proyectos' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag.name }}</span>
         {% endfor %}
         <!--span>Arte</span>
         <span>Tecnologia</span>

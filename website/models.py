@@ -48,12 +48,19 @@ class Scrollytelling(models.Model):
     ready = models.BooleanField(default=False)
     name_key = models.CharField(max_length=10, default="")
     data = models.TextField(default="")
+    TYPE_LIST = [('esp', 'ESPAÑOL'),
+                 ('por', 'PORTUGUESE'),
+                 ('eng', 'ENGLISH'),
+                 ]
+    lenguaje = models.CharField(max_length=30, choices=TYPE_LIST, default='esp')
 
     def __str__(self):
         return self.name_key
 
 class Tags(models.Model):
     tag = models.CharField(max_length=120)
+    name_por = models.CharField(max_length=120, null=True, blank=True)
+    name_eng = models.CharField(max_length=120, null=True, blank=True)
 
     def __str__(self):
         return self.tag
