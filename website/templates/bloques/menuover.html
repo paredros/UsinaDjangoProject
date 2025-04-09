@@ -1,4 +1,5 @@
 {% load static %}
+{% load url_con_idioma %}
 <section class="menu-over fullWidth">
     <holder id="menu-over-holder" class="hide-menu-over">
         <close id="close-menu-over-holder">
@@ -9,8 +10,8 @@
             <div id="Idioma1">
                 <h1>{{ menuover.idioma.titulo }}</h1>
                 <linea></linea>
-                <p>{{ menuover.idioma.esp }}</p>
-                <p>{{ menuover.idioma.por }}</p>
+                <p onclick="window.open(`{% cambiar_idioma_url 'es' %}`,target='_self');return false">{{ menuover.idioma.esp }}</p>
+                <p onclick="window.open(`{% cambiar_idioma_url 'pt' %}`,target='_self');return false">{{ menuover.idioma.por }}</p>
             </div>
         </section>
 

@@ -1,4 +1,5 @@
 {% load static %}
+{% load filters %}
 <!DOCTYPE html>
 
 <!--html lang="es" class="prevent-scroll-y"-->
@@ -133,9 +134,10 @@
 
             {% for tag in tags %}
                 <a id="myLink" title="{{ base.filtra }}"
-                   href="#" onclick="clickOnTag('{{ tag }}');return false;"><span id="tag-{{ tag }}">{{ tag }}</span></a>
+                   href="#" onclick="clickOnTag('{{ tag }}');return false;"><span id="tag-{{ tag }}">{{ tag | nombre_tag:idioma }}</span></a>
                 <script>
                     tags["{{ tag }}"] = {}
+                    tags["{{ tag }}"]["name"]="{{ tag | nombre_tag:idioma }}"
                     tags["{{ tag }}"]["status"]=1;
                     tags["{{ tag }}"]["slug"] = "{{ tag }}";
                     tagsList.push(tags["{{ tag }}"]);
@@ -151,14 +153,14 @@
                         <img src="{{ proyecto.imagen_principal.url }}" alt="">
                     </bg>
                     <titulo>
-                        <span>{{ proyecto.titulo }}</span>
+                        <span>{{ proyecto | proyecto_titulo:idioma }}</span>
                     </titulo>
                     {% if proyecto.anio is not None %}
                     <fecha>
                         {{ proyecto.anio }}
                     </fecha>
                     {% endif %}
-                <over><span>{{ base.abrir }}</span><p>{{ proyecto.titulo }}</p></over>
+                <over><span>{{ base.abrir }}</span><p>{{ proyecto | proyecto_titulo:idioma }}</p></over>
                 </content_mini>
                 <script>
                     $("#{{ proyecto.slug }}").on("click", function(){
@@ -382,7 +384,7 @@
         core.selected=proy[slug]
         $("#holder"+core.currentId).addClass("content-closed")
 
-        fetch("/get_ajax_data/"+slug, {
+        fetch("{% url 'getdata' %}"+slug, {
           method: "GET",
           headers: {
             "X-Requested-With": "XMLHttpRequest",

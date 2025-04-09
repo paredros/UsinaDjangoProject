@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load filters %}
 <div class="endpage">
         <div class="subLeft">
           <div class="subTop"></div>
@@ -32,13 +32,13 @@
                 {% elif linea.tipo == "tags" %}
                     <tags>
                     {% for tag in bloque_data.data.tags.all %}
-                        <span onclick="window.open('{% url 'proyectos' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag }}</span>
+                        <span onclick="window.open('{% url 'proyectos' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag.name }}</span>
                     {% endfor %}
                     </tags>
                 {% elif linea.tipo == "soluciones" %}
                     <servicios>
                     {% for servicio in bloque_data.data.servicios %}
-                        <span onclick="window.open('{% url 'soluciones' %}{{ servicio.slug }}',target='_self');return false">{{ servicio.titulo }}</span>
+                        <span onclick="window.open('{% url 'soluciones' %}{{ servicio.slug }}',target='_self');return false">{{ servicio | proyecto_titulo:idioma }}</span>
                     {% endfor %}
                     </servicios>
                 {% elif linea.tipo == "sublinks" %}

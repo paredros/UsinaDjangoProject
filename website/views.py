@@ -1,10 +1,11 @@
 from django.core.validators import validate_email
+from django.db.models import F
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import json
 
 from website.models import Scrollytelling, Bloques, Tags, Proyecto, Direcciones, Alianza, Nota, Persona, MensajesDejados
-from website.preprocess import preprocess_general, check_lenguaje
+from website.preprocess import preprocess_general, check_lenguaje, get_menuover, get_bloque
 
 from django.core import serializers
 
@@ -12,19 +13,12 @@ from django.views.decorators.csrf import csrf_protect
 
 
 # Create your views here.
-def index(request, leng=None):
+def index(request):
 
-    lenguaje = "esp"
-    if leng is not None:
-        lenguaje=check_lenguaje(leng)
-    else:
-        leng = request.COOKIES.get('lenguaje')
-        if leng is not None:
-            lenguaje=check_lenguaje(leng)
-        else:
-            val = request.session.get("lenguaje", False)
-            if val:
-                lenguaje = check_lenguaje(val)
+
+    idioma = request.LANGUAGE_CODE[:2]
+    lenguaje = check_lenguaje(idioma)
+
 
     scrollytelling = Scrollytelling.objects.filter(ready=True, lenguaje=lenguaje).first()
     if scrollytelling is None:
@@ -32,57 +26,80 @@ def index(request, leng=None):
     test = json.loads(scrollytelling.data)
     for bloque in test["bloques"]:
         if "preprocess" in bloque:
-            print(lenguaje + bloque["preprocess"])
+
             bloque["data"] = preprocess_general(bloque["preprocess"], lenguaje)
 
-    info = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
+    #info = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
+    info = get_menuover(lenguaje)
 
     test["menuover"] = json.loads(info.json)
 
-    response = render(request, "index_es.html", {"testeo":"Que onda", "data":test})
+    response = render(request, "index_es.html", {"data":test, 'idioma':lenguaje})
     response.set_cookie('lenguaje', lenguaje)
     request.session["lenguaje"] = lenguaje
 
     return response
 
 def proyectos(request, slug=None):
+    idioma = request.LANGUAGE_CODE[:2]
+    lenguaje = check_lenguaje(idioma)
     data = {}
-    info = Bloques.objects.all().filter(titulo="proyectoshome", lenguaje="esp").first()
+    #info = Bloques.objects.all().filter(titulo="proyectoshome", lenguaje="esp").first()
+    info = get_bloque("proyectoshome",lenguaje)
     data["base"] = json.loads(info.json)
     #tags = Tags.objects.all().order_by("tag")
-    tags = Tags.objects.filter(proyecto__es_servicio=False).distinct().order_by("tag")
+    campo = f'name_{lenguaje}'
+    if lenguaje == "esp":
+        campo = "tag"
+    tags = Tags.objects.filter(proyecto__es_servicio=False).distinct().annotate(name=F(campo)).order_by("tag")
     data["tags"] = tags
     proyectos = Proyecto.objects.filter(publicado=True, es_servicio=False).all()
     data["proyectos"] = proyectos
 
-    info = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
+    #info = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
+    info = get_menuover(lenguaje)
 
     data["menuover"] = json.loads(info.json)
+    data["idioma"]=lenguaje
 
     return render(request, "proyectos.html", data)
 
 
 def servicios(request, slug=None):
+    idioma = request.LANGUAGE_CODE[:2]
+    lenguaje = check_lenguaje(idioma)
     data = {}
-    info = Bloques.objects.all().filter(titulo="servicioshome", lenguaje="esp").first()
+    #info = Bloques.objects.all().filter(titulo="servicioshome", lenguaje="esp").first()
+    info = get_bloque("servicioshome", lenguaje)
     data["base"] = json.loads(info.json)
     #tags = Tags.objects.all().order_by("tag")
-    tags = Tags.objects.filter(proyecto__es_servicio=True).distinct().order_by("tag")
+    campo = f'name_{lenguaje}'
+    if lenguaje == "esp":
+        campo = "tag"
+    tags = Tags.objects.filter(proyecto__es_servicio=True).distinct().annotate(name=F(campo)).order_by("tag")
     data["tags"] = tags
     proyectos = Proyecto.objects.filter(publicado=True, es_servicio=True).all()
     data["proyectos"] = proyectos
 
-    info = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
+    #info = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
+    info = get_menuover(lenguaje)
 
     data["menuover"] = json.loads(info.json)
+    data["idioma"]=lenguaje
 
     return render(request, "proyectos.html", data)
 
 def nosotros(request):
+    idioma = request.LANGUAGE_CODE[:2]
+    lenguaje = check_lenguaje(idioma)
+
     data={}
-    menu = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
-    contact = Bloques.objects.all().filter(titulo="contactformdata", lenguaje="esp").first()
-    nosotros = Bloques.objects.all().filter(titulo="nosotroshome", lenguaje="esp").first()
+    #menu = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
+    menu = get_menuover(lenguaje)
+    #contact = Bloques.objects.all().filter(titulo="contactformdata", lenguaje="esp").first()
+    contact = get_bloque("contactformdata", lenguaje)
+    #nosotros = Bloques.objects.all().filter(titulo="nosotroshome", lenguaje="esp").first()
+    nosotros = get_bloque("nosotroshome", lenguaje)
     personas = Persona.objects.all().filter(es_externo=False).order_by("orden_portada")
 
     data["personas"] = personas
@@ -99,13 +116,19 @@ def nosotros(request):
     for alianza in alianzas:
         data["alianzas"].append({"titulo":alianza.nombre,"links":alianza.links.split(",")})
 
+    data["idioma"]=lenguaje
 
     return render(request, "nosotros.html", data)
 
 def vivousina(request, slug=None):
+    idioma = request.LANGUAGE_CODE[:2]
+    lenguaje = check_lenguaje(idioma)
+
     data = {}
-    menu = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
-    vivohome = Bloques.objects.all().filter(titulo="vivohome", lenguaje="esp").first()
+    #menu = Bloques.objects.all().filter(titulo="menuover", lenguaje="esp").first()
+    menu = get_menuover(lenguaje)
+    #vivohome = Bloques.objects.all().filter(titulo="vivohome", lenguaje="esp").first()
+    vivohome = get_bloque("vivohome", lenguaje)
     data["menuover"] = json.loads(menu.json)
     data["vivohome"] = json.loads(vivohome.json)
     if slug==None:
@@ -115,12 +138,22 @@ def vivousina(request, slug=None):
         if Nota.objects.all().filter(slug=slug).exists():
             nota = Nota.objects.get(slug=slug)
             data["nota"] = nota
+
+    data["idioma"]=lenguaje
+
     return render(request, "vivousina.html", data)
 
 def get_ajax_data(request, slug=None):
+    idioma = request.LANGUAGE_CODE[:2]
+    lenguaje = check_lenguaje(idioma)
     data = {}
 
     info = Proyecto.objects.filter(publicado=True, slug=slug).first()
+    info.titulo = info.get_titulo(lenguaje)
+    info.slide_text=info.get_slide(lenguaje)
+    info.subtitulo=info.get_subtitulo(lenguaje)
+    info.copete=info.get_copete(lenguaje)
+    info.texto=info.get_texto(lenguaje)
 
     if not info:
         return JsonResponse({"status": "bad"})

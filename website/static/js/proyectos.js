@@ -72,12 +72,12 @@ core.buildContent=function (data){
         let t= proy[data.data.slug].tags[i];
         tags_t+="<a href='#' onclick='clickOnTag(`"+t+"`);return false;'>"
         if(tags[t]["status"]==2){
-            tags_t += "<span class='tagselected'>"+t+"</span>"
+            tags_t += "<span class='tagselected'>"+tags[t]["name"]+"</span>"
         }else{
             if(filterList.length>0){
-                tags_t += "<span class='tagsecondary'>"+t+"</span>"
+                tags_t += "<span class='tagsecondary'>"+tags[t]["name"]+"</span>"
             }else{
-                tags_t += "<span>"+t+"</span>"
+                tags_t += "<span>"+tags[t]["name"]+"</span>"
             }
         }
         tags_t+="</a>"

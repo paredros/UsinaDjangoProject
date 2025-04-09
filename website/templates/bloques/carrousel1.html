@@ -1,3 +1,4 @@
+{% load filters %}
 <section class="nopadding" id="{{ bloque_data.id_global }}">
     <{{ bloque_data.section_type }} class="slider-horizontal">
         <holder>
@@ -9,7 +10,7 @@
                     <proyecto>
                         <img id="back" src="{{ slide.imagen_principal.url }}" alt="">
                         <datos>
-                            <titulo><span>{{ slide.titulo }}</span></titulo>
+                            <titulo><span>{{ slide | proyecto_titulo:idioma }}</span></titulo>
                             {% if not slide.es_servicio %}
                             <data>
                                 {% if slide.anio is not None %}
@@ -26,16 +27,16 @@
                             <tags>
                                 {% for tag in slide.tags.all %}
                                     {% if slide.es_servicio %}
-                                    <span onclick="window.open('{% url 'soluciones' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag }}</span>
+                                    <span onclick="window.open('{% url 'soluciones' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag|nombre_tag:idioma }}</span>
                                     {% else %}
-                                    <span onclick="window.open('{% url 'proyectos' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag.name }}</span>
+                                    <span onclick="window.open('{% url 'proyectos' %}?tags={{ tag.tag }}',target='_self');return false">{{ tag|nombre_tag:idioma }}</span>
                                     {% endif %}
                                 {% endfor %}
 
                             </tags>
                             <figcaption>
 
-                                <h1>{{ slide.slide_text}}</h1>
+                                <h1>{{ slide | proyecto_slidetext:idioma}}</h1>
 
                             </figcaption>
                             {% if slide.es_servicio %}

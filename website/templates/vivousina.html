@@ -1,4 +1,5 @@
 {% load static %}
+{% load filters %}
 <!DOCTYPE html>
 
 <!--html lang="es" class="prevent-scroll-y"-->
@@ -50,9 +51,9 @@
             {% for nota in notas %}
                 <notamini onclick="window.open('{% url 'vivo' %}{{ nota.slug }}',target='_self');return false;">
                     <img src="{{nota.imagen_principal.url}}" alt="{{nota.titulo}}">
-                    <titulo>{{ nota.titulo}}</titulo>
-                    <copete>{{ nota.copete}}</copete>
-                    <over><span>ABRIR</span><p>{{ nota.titulo}}</p></over>
+                    <titulo>{{ nota | nota_titulo:idioma }}</titulo>
+                    <copete>{{ nota | nota_copete:idioma}}</copete>
+                    <over><span>{{ vivohome.abrir }}</span><p>{{ nota | nota_titulo:idioma}}</p></over>
                 </notamini>
             {% endfor %}
         </notas>
@@ -60,15 +61,15 @@
         {% if nota is not None %}
             <nota-page>
                 {% if nota.subtitulo is not None %}
-                <subtitulo>{{ nota.subtitulo | safe }}</subtitulo>
+                <subtitulo>{{ nota |nota_subtitulo:idioma | safe }}</subtitulo>
                 {% endif %}
                 <big-image>
                     <img src="{{nota.imagen_principal.url}}">
                 </big-image>
                 <space></space>
-                <titulo>{{ nota.titulo | safe }}</titulo>
+                <titulo>{{ nota | nota_titulo:idioma | safe }}</titulo>
                 {% if nota.copete is not None %}
-                <copete>{{ nota.copete | safe }}</copete>
+                <copete>{{ nota | nota_copete:idioma | safe }}</copete>
                 {% endif %}
                 <texto>
                     {{ nota.texto | safe }}
@@ -82,7 +83,7 @@
                     </imagenes-archivo>
                 {% endif %}
                 {% if nota.slide_text is not None %}
-                <slide-text>{{ nota.slide_text | safe }}</slide-text>
+                <slide-text>{{ nota | nota_slidetext:idioma | safe }}</slide-text>
                 {% endif %}
             <space></space>
             <personas>
@@ -93,7 +94,7 @@
                     </foto>
                     <nombre>{{ persona.persona.nombre }}</nombre>
                     <cargo>{{ persona.persona.posicion | safe}}</cargo>
-                    <over><p>{{ persona.persona.resume | safe }}</p></over>
+                    <over><p>{{ persona.persona | persona_resume:idioma | safe }}</p></over>
                     </persona>
                 {% endfor %}
             </personas>
